@@ -1,7 +1,7 @@
 {
     "database.host": "localhost",
-    "database.name": "discuss",
-    "database.user": "discuss",
-    "database.pass": "a6PFfrHnsYThfdeL",
+    "database.name": "hwdisc",
+    "database.user": "hwdisc",
+    "database.pass": "test123",
     "title": "Hello World"
 }
