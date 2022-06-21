@@ -77,7 +77,7 @@
         }
 
         div.main {
-            padding-left: 200px;
+            padding-left: 100px;
             top: 100px;
         }
 
@@ -122,16 +122,16 @@
             <a class="navbar-brand" href="index.php"><?php echo $config["title"]; ?></a>
         </div>
 
-        <li><a href="index.php?act=home" data-toggle=tab">首页</a></li>
+        <li><a href="index.php?act=home" data-toggle="tab">首页</a></li>
 
-        <li><a href="index.php?act=parts" data-toggle=tab">分区</a></li>
+        <li><a href="index.php?act=parts" data-toggle="tab">分区</a></li>
 
 
         <?php
 
         if (isset($_COOKIE["uid"])) {
             $spacelink = $_COOKIE["uid"];
-            echo "<li><a href=space.php?uid=" . $spacelink . " data-toggle=tab\">个人空间</a></li>";
+            echo "<li><a href=index.php?act=space&uid=" . $spacelink . " data-toggle=tab\">个人空间</a></li>";
             echo "<li><a href=index.php?act=logout data-toggle=tab\">退出登录</a></li>";
         } else {
             echo "<li><a href=\"index.php?act=login\" data-toggle=tab\">登录</a></li>";
@@ -168,35 +168,7 @@
         }
         // Load action
         if ($act == "home") {
-            echo "<ul class='top-bar'>";
-            if (isset($_COOKIE["uid"])) {
-                $login = $_COOKIE["uid"];
-            } else {
-                $login = "not logged in";
-            }
-            if ($login == "not logged in") {
-                echo "<li><a href='index.php?act=login'>登录</a></li>";
-                echo "<li><a href='index.php?act=signup'>注册</a></li>";
-            } else {
-                // Get user info from database
-                $user_info = $conn->query("SELECT * FROM users WHERE user_id='$login'");
-                $user_info = $user_info->fetch_assoc();
-                echo "<li><a href='index.php?act=user'>" . $user_info["username"] . "</a></li>";
-                echo "<li><a href='index.php?act=create-dis'>发帖</a></li>";
-                echo "<li><a href='index.php?act=logout'>退出登录</a></li>";
-            }
-            echo '</ul>';
-            echo "<ul class=\"articles\">";
-            // Get articles from database
-            $result = $conn->query("SELECT * FROM discusses");
-            // Output each article
-            while ($row = $result->fetch_assoc()) {
-                if ($row["floor"] == 0) {
-                    echo "<li><a href=\"index.php?act=discuss&id=" . $row["dis_id"] . "\">" .
-                        $row["title"] . "</a></li>";
-                }
-            }
-            echo "</ul>";
+            require "home.php";
         } else if ($act == "login") {
             // Login page
             echo "<form action=\"index.php?act=login_next\" method=\"post\">";
@@ -289,7 +261,7 @@
             // Insert discuss into database
             //get unique_id by $timestamp
             $timestampn = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id,sendtime) VALUES ($dis_id, '$user_id', '$title', '$content', 0, 0 , $timestampn)");
+            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ($dis_id, '$user_id', '$title', '$content', 0, 0)");
             // Redirect to home
             header("location: index.php?act=home");
         } else if ($act == "discuss") {
@@ -350,6 +322,9 @@
             echo $_COOKIE["uid"];
             // Redirect to the discuss
             header("location: index.php?act=discuss&id=$dis_id");
+        } else if ($act == "space") {
+            // Show space page
+            require "space.php";
         }
         ?>
     </div>
