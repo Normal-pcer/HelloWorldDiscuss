@@ -129,6 +129,13 @@
             echo "<ul class='top-bar'>";
             if (isset($_COOKIE["uid"])) {
                 $login = $_COOKIE["uid"];
+                $sql = "SELECT * FROM users WHERE user_id='$login'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $pass_sha256 = $_COOKIE["pass_sha256"];
+                if ($pass_sha256 != $row["password"]) {
+                    $login = "not logged in";
+                }
             } else {
                 $login = "not logged in";
             }
@@ -150,8 +157,13 @@
             // Output each article
             while ($row = $result->fetch_assoc()) {
                 if ($row["floor"] == 0) {
+                    // get user info from database
+                    $user_info = $conn->query("SELECT * FROM users WHERE user_id='$row[user_id]'");
+                    $user_info = $user_info->fetch_assoc();
+
                     echo "<li><a href=\"index.php?act=discuss&id=" . $row["dis_id"] . "\">" .
-                        $row["title"] . "</a></li>";
+                        $row["title"] . "</a> - <a href='space.php?uid=" . $user_info["user_id"] .
+                        "'> " . $user_info["username"] . " </a></li>";
                 }
             }
             echo "</ul>";
@@ -178,8 +190,8 @@
                 $password_sha256 = hash("sha256", $password);
                 if ($password_sha256 == $user_info["password"]) {
                     // Set cookie
-                    // header("location: write_into_cookie.php?id=" . $user_info["user_id"]);
                     setcookie("uid", $user_info["user_id"], time() + 2592000); // 30 days
+                    setcookie("pass_sha256", $user_info["password"], time() + 2592000); // 30 days
                     header("location: index.php?act=home");
                     // Redirect to home
                 } else {
@@ -223,6 +235,7 @@
                     $conn->query("INSERT INTO users (user_id, username, password, email) VALUES ('$user_id', '$username', '$password_sha256', '$email')");
                     // Set cookie
                     setcookie("uid", $user_id, time() + 2592000); // 30 days
+                    setcookie("pass_sha256", $password_sha256, time() + 2592000); // 30 days
                     header("location: index.php?act=home");
                 }
             }
@@ -259,15 +272,17 @@
                     // get username
                     $result_user = $conn->query("SELECT username FROM users WHERE user_id='" . $row["user_id"] . "'");
                     $user_info = $result_user->fetch_assoc();
-                    echo "<p>" . $user_info["username"] . "</p>";
-                    echo "<p>" . str_replace("\n", "<br>", $row["text"]) . "</p>";
+                    echo "<p><a href='space.php?uid=" . $user_info["user_id"] . "'>" .
+                        $user_info["username"] . "</p>";
+                    echo "<p>" . htmlentities($row["text"], ENT_QUOTES) . "</p>";
                 } else {
                     echo "<h1>" . $row["title"] . "</h1>";
                     // get username
                     $result_user = $conn->query("SELECT * FROM users WHERE user_id='" . $row["user_id"] . "'");
                     $user_info = $result_user->fetch_assoc();
-                    echo "<p>作者：" . $user_info["username"] . "</p>";
-                    echo "<p>" . str_replace("\n", "<br>", $row["text"]) . "</p>";
+                    echo "<p><a href=\"space.php?uid=" . $user_info["user_id"] . "\">作者：" .
+                        $user_info["username"] . "</a></p>";
+                    echo "<p>" . htmlentities($row["text"], ENT_QUOTES) . "</p>";
                     echo "<hr>";
                     echo "<form action=\"index.php?act=reply-next\" method=\"post\">";
                     echo "<input type=\"hidden\" name=\"dis_id\" value=$dis_id>";
@@ -284,13 +299,6 @@
             if (!isset($_COOKIE["uid"])) {
                 die("请先登录");
             }
-            if (strpos($content, "<script") !== false) {
-                die("请不要使用恶意代码，听我说谢谢你");
-            }
-
-            // Ban HTML tags
-            $content = str_replace("<", "&lt;", $content);
-            $content = str_replace(">", "&gt;", $content);
 
             $user_id = $_COOKIE["uid"];
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
@@ -300,9 +308,17 @@
             echo $_COOKIE["uid"];
             // Redirect to the discuss
             header("location: index.php?act=discuss&id=$dis_id");
+        } else if ($act == "user") {
+            // Show space page
+            $uid = $_GET["uid"];
+            // Jump to space.php
+            header("location: space.php?uid=$uid");
         }
         ?>
     </div>
+    <h6>Thanks for <a href="https://github.com/Normal-pcer">Normal-pcer</a> and
+        <a href="https://github.com/quqi2">quqi2</a>
+    </h6>
 </body>
 
 </html>
