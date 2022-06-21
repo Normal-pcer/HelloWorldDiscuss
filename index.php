@@ -29,7 +29,7 @@
     <script charset="utf-8" src="/editor/lang/zh-CN.js"></script>
     <script>
         KindEditor.ready(function(K) {
-                window.editor = K.create('#editor_id');
+            window.editor = K.create('#editor_id');
         });
     </script>
 
@@ -118,28 +118,26 @@
 
 <body>
     <ul class="nav nav-tabs">
-    <div class="navbar-header">
-    <a class="navbar-brand" href="index.php"><?php echo $config["title"]; ?></a>
-    </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.php"><?php echo $config["title"]; ?></a>
+        </div>
 
-    <li><a href="index.php?act=home" data-toggle=tab">首页</a></li>
+        <li><a href="index.php?act=home" data-toggle=tab">首页</a></li>
 
-    <li><a href="index.php?act=parts" data-toggle=tab">分区</a></li>
+        <li><a href="index.php?act=parts" data-toggle=tab">分区</a></li>
 
-   
-    <?php
-    
-    if(isset($_COOKIE["uid"])){
-        $spacelink=$_COOKIE["uid"];
-        echo "<li><a href=space.php?uid=".$spacelink." data-toggle=tab\">个人空间</a></li>";
-        echo "<li><a href=index.php?act=logout data-toggle=tab\">退出登录</a></li>";
-    }
-    else
-    {
-       echo "<li><a href=\"index.php?act=login\" data-toggle=tab\">登录</a></li>";
-       echo "<li><a href=\"index.php?act=signup\" data-toggle=tab\">注册</a></li>";
-    }
-    ?>
+
+        <?php
+
+        if (isset($_COOKIE["uid"])) {
+            $spacelink = $_COOKIE["uid"];
+            echo "<li><a href=space.php?uid=" . $spacelink . " data-toggle=tab\">个人空间</a></li>";
+            echo "<li><a href=index.php?act=logout data-toggle=tab\">退出登录</a></li>";
+        } else {
+            echo "<li><a href=\"index.php?act=login\" data-toggle=tab\">登录</a></li>";
+            echo "<li><a href=\"index.php?act=signup\" data-toggle=tab\">注册</a></li>";
+        }
+        ?>
 
     </ul>
     <?php
@@ -157,7 +155,7 @@
         <h1><?php echo $config["title"]; ?></h1>
     </div>
 
-   
+
 
     <div class="main">
         <?php
@@ -264,7 +262,7 @@
                     // Get user id
                     $user_id = $conn->query("SELECT MAX(user_id) FROM users")->fetch_assoc()["MAX(user_id)"] + 1;  // Get next user id
                     // Insert user into database
-                    $timestampnow=time();
+                    $timestampnow = time();
                     $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `point`, `qianming`, `ban`, `avatar`, `bantimes`, `isadmin`) VALUES ('$user_id', '$username', '$password_sha256', '$email', '1', '这个人很懒，什么也没有写', '0', 'no', '0', '0')");
                     // Set cookie
                     setcookie("uid", $user_id, time() + 2592000); // 30 days
@@ -290,7 +288,7 @@
             $dis_id = $conn->query("SELECT MAX(dis_id) FROM discusses")->fetch_assoc()["MAX(dis_id)"] + 1;  // Get next discuss id
             // Insert discuss into database
             //get unique_id by $timestamp
-            $timestampn=time();
+            $timestampn = time();
             $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id,sendtime) VALUES ($dis_id, '$user_id', '$title', '$content', 0, 0 , $timestampn)");
             // Redirect to home
             header("location: index.php?act=home");
@@ -336,8 +334,8 @@
                 header("location: index.php?act=login");
                 die("请先登录");
             }
-           // if (strpos($content, "<script") !== false) {
-           //     die("请不要使用恶意代码，听我说谢谢你");
+            // if (strpos($content, "<script") !== false) {
+            //     die("请不要使用恶意代码，听我说谢谢你");
             //}
 
             // 转义特殊字符
@@ -346,7 +344,7 @@
             $user_id = $_COOKIE["uid"];
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
-            $timestampnow2=time();
+            $timestampnow2 = time();
             $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id, sendtime) VALUES ('$dis_id', '$user_id', 'none', '$content', '$floor', 0, $timestampnow2)");
 
             echo $_COOKIE["uid"];
@@ -358,20 +356,21 @@
 </body>
 <footer>
     <div class="container-fluid" style="padding-top: 40px;">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="jumbotron">
-                <div class="container">
-                    <center>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="jumbotron">
+                    <div class="container">
+                        <center>
 
-                        <p>Copyright© 2022 All Rights Reserved. </p>
-                        <p>正在开发中</p>
-                    </center>
+                            <p>Copyright© 2022 All Rights Reserved. </p>
+                            <p>正在开发中</p>
+                        </center>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </footer>
+
 </html>
