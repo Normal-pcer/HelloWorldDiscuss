@@ -48,7 +48,7 @@ while ($row = $result->fetch_assoc()) {
         // get username
         $result_user = $conn->query("SELECT * FROM users WHERE user_id='" . $row["user_id"] . "'");
         $user_info = $result_user->fetch_assoc();
-        echo "<p>作者：" . $user_info["username"] . "</p>";
+        echo "<p><a href=index.php?act=space&uid=" . $user_info["user_id"] . ">作者：" . $user_info["username"] . "</a></p>";
         echo $row["text"];
         echo "
 <hr>";
