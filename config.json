@@ -1,8 +1,8 @@
 {
     "database.host": "localhost",
-    "database.name": "hwdisc",
-    "database.user": "hwdisc",
-    "database.pass": "test123",
+    "database.name": "discuss",
+    "database.user": "discuss",
+    "database.pass": "a6PFfrHnsYThfdeL",
     "title": "Hello World",
     "server.salt.enabled": true,
     "server.salt.value": 5394811005627065,
