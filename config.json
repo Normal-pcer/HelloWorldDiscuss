@@ -3,5 +3,7 @@
     "database.name": "discuss",
     "database.user": "discuss",
     "database.pass": "a6PFfrHnsYThfdeL",
-    "title": "Hello World"
+    "title": "Hello World",
+    "Plugin.UserFile.Enabled": true,
+    "Plugin.UserFile.MaxSize": "10MB"
 }
