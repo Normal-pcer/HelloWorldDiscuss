@@ -26,7 +26,7 @@ function get_user_information_from_uid($user_id, $check_pass = false, $pass = 0)
 
         if ($check_pass) {
             // Check if password is correct
-            if (password_verify($pass, $row['password'])) {
+            if (is_password_true($pass, $row['password'])) {
                 // Return user information
                 return $row;
             } else {
@@ -44,6 +44,10 @@ function get_user_information_from_uid($user_id, $check_pass = false, $pass = 0)
 function get_user_information_from_cookie()
 {
     // Get cookie
+    if (!isset($_COOKIE['uid'])) {
+        return false;
+    } 
+
     $user_id = $_COOKIE['uid'];
     $user_password = $_COOKIE['pass_sha256'];
 
