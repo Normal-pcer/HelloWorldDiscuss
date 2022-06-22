@@ -26,6 +26,8 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
     `email` varchar(255) NOT NULL,
     `usergroup` int(11) NOT NULL,
     `points` int(11) NOT NULL DEFAULT '0',
+    `banned` int(11) NOT NULL DEFAULT '0',
+    `unban_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);

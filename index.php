@@ -189,8 +189,8 @@
                 $user_info = $result->fetch_assoc();
                 // Check password
                 // Get password SHA256
-                $password_sha256 = hash("sha256", $password);
-                if ($password_sha256 == $user_info["password"]) {
+                require "funcs.php";
+                if (is_password_true($password, $user_info["password"])) {
                     // Set cookie
                     // header("location: write_into_cookie.php?id=" . $user_info["user_id"]);
                     setcookie("uid", $user_info["user_id"], time() + 2592000); // 30 days
@@ -220,22 +220,30 @@
             $email = $_POST["email"];
             $pass_again = $_POST["pass_again"];
 
+            $pass_check = '/(?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{6,}/';
+
             // Check if password is the same
             if ($password != $pass_again) {
                 echo "两次密码不一致";
+            } else if (
+                preg_match($pass_check, $password) == 0
+            ) {
+                echo "密码强度不足，需包含：";
+                echo '<ul><li>6位及以上字符</li><li>字母、数字和特殊符号</li></ul>';
             } else {
                 // Check if username is taken
                 $result = $conn->query("SELECT * FROM users WHERE username='$username'");
                 if ($result->num_rows != 0) {
                     echo "用户名已被使用";
                 } else {
+                    require 'funcs.php';
                     // Get password SHA256
-                    $password_sha256 = hash("sha256", $password);
+                    $password_sha256 = encode_pass($password);
                     // Get user id
                     $user_id = $conn->query("SELECT MAX(user_id) FROM users")->fetch_assoc()["MAX(user_id)"] + 1;  // Get next user id
                     // Insert user into database
                     $timestampnow = time();
-                    $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `point`, `qianming`, `ban`, `avatar`, `bantimes`, `isadmin`) VALUES ('$user_id', '$username', '$password_sha256', '$email', '1', '这个人很懒，什么也没有写', '0', 'no', '0', '0')");
+                    $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES ('$user_id', '$username', '$password_sha256', '$email')");
                     // Set cookie
                     setcookie("uid", $user_id, time() + 2592000); // 30 days
                     header("location: index.php?act=home");
