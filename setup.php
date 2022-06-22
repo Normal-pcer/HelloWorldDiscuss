@@ -59,10 +59,8 @@ $sql = "CREATE TABLE IF NOT EXISTS `usergroups` (
 $conn->query($sql);
 
 // Add admin user
-$pass = "123456";
-if ($config["server.salt.enabled"]) {
-    $pass = hash('sha256', $pass . $config["server.salt.value"]);
-}
+require 'funcs.php';
+$pass = encode_pass('123456');
 
 $sql = "INSERT INTO `users` (`username`, `password`, `email`, `points`) VALUES ('admin', '$pass', 'admin@example.com', '0');";
 $conn->query($sql);
