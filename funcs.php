@@ -93,3 +93,50 @@ function get_ip_location($ipaddress){
 
 
 }
+
+function get_discuss($dis_id, $floor)
+{
+    // Read config.json
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    // Connect to database
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    // Get discuss information from database
+    $sql = "SELECT * FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
+    $result = $conn->query($sql);
+    $result = $result->fetch_assoc();
+    return $result;
+}
+
+function del_discuss($dis_id, $floor)
+{
+    // check if user is the owner of the discuss or admin
+    $user = get_user_information_from_cookie();
+    if ($user == false) {
+        die("ERR_NOT_LOGIN");
+    }
+    $dis = get_discuss($dis_id, $floor);
+
+    if ($user['user_id'] == $dis['user_id'] || $user['usergroup'] == 0) {
+        // Read config.json
+        $config = json_decode(file_get_contents('config.json'), true);
+        $db_host = $config['database.host'];
+        $db_name = $config['database.name'];
+        $db_user = $config['database.user'];
+        $db_pass = $config['database.pass'];
+
+        // Connect to database
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+        // Delete discuss from database
+        $sql = "DELETE FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
+        $result = $conn->query($sql);
+    } else {
+        die("ERR_NOT_OWNER");
+    }
+}
