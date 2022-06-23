@@ -84,18 +84,31 @@
     echo "<br>";
     echo "<h3>主要设置概览：</h3>";
     echo "<ul>";
+    //加盐开启状态
     if($config["server.salt.enabled"]){
       echo "<li><font color=\"#9bef51\" size=3 >已启用密码加盐</font></li>";
     }
     else{
       echo "<li><font color=brown>未启用密码加盐,启用可有效保证密码安全</font></li>";
     }
-
+    //显示ip属地开启状态
     if($config["plugin.shouiplocation.enabled"]){
       echo "<li><font color=\"#9bef51\" size=3>已启用ip属地显示</font></li>";
     }
     else{
       echo "<li><font color=brown>未启用ip属地显示（启用可有效防治网暴，冒充热点当事人等行为）</font></li>";
+    }
+    //查看数开启状态
+    if($config["plugin.countview.enabled"]){
+      if($config["plugin.countview.user_only"]){
+        echo "<li><font color=\"#9bef51\" size=3>已启用查看数，已开启去重</font></li>";
+      }
+      else{
+        echo "<li><font color=brown>已启用查看数，但是未开启去重，建议开启</font></li>";
+      }
+    }
+    else{
+      echo "<li><font color=grey>未开启查看数</font></li>";
     }
 
     echo "<li><font size=3>php版本号:".substr(PHP_VERSION,0,3)."(建议使用7.0以上版本）</font>";
