@@ -162,7 +162,9 @@ function getusrip(){
     */;
 }
 }
-
+function antisql($data) {
+    return addslashes(strip_tags(trim($data)));
+} 
 
 
 

@@ -1,3 +1,4 @@
+<?php ob_start();?>
 <html>
 
 <head>
@@ -14,7 +15,8 @@
 </head>
 
 <body>
-    <?php require "navbar.php";?>
+    
+    <?php require "navbar.php"//获取navbar 直接引用;?>
     <?php
 
     // Connect to MySQL
@@ -35,7 +37,7 @@
     <div class="main">
         <?php
         // Get action
-
+        ob_start();
         if (array_key_exists("act", $act)) {
             $act = $act["act"];
         } else {
@@ -106,6 +108,9 @@
             ) {
                 echo "密码强度不足，需包含：";
                 echo '<ul><li>6位及以上字符</li><li>字母、数字和特殊符号</li></ul>';
+                echo '(3秒后回到注册页面）<br>';
+                echo "<a href=\"index.php?act=signup\">如果您的浏览器没有自动跳转，请点击此处</a>";
+                echo "<meta http-equiv=\"Refresh\" content=\"3;url=index.php?act=signup\" />";
             } else {
                 // Check if username is taken
                 $result = $conn->query("SELECT * FROM users WHERE username='$username'");
@@ -119,8 +124,9 @@
                     $user_id = $conn->query("SELECT MAX(user_id) FROM users")->fetch_assoc()["MAX(user_id)"] + 1;  // Get next user id
                     // Insert user into database
                     $timestampnow = time();
-                    $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES ('$user_id', '$username', '$password_sha256', '$email')");
+                    $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `point`, `qianming`, `ban`, `avatar`, `bantimes`, `isadmin`) VALUES ('$user_id', '$username', '$password_sha256', '$email', '0', '这个人很懒，什么都没有写', '0', 'no', '0', '0')");
                     // Set cookie
+                    ob_start();
                     setcookie("uid", $user_id, time() + 2592000); // 30 days
                     header("location: index.php?act=home");
                 }
