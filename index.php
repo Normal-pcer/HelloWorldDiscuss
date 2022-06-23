@@ -54,6 +54,10 @@ require "funcs.php";
             require "home.php";
         } else if ($act == "login") {
             // Login page
+            if(isset($_COOKIE)){
+                echo "<script>alert('您已登录，无需重复登录');</script>";
+                echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php\" />";
+            }
             echo "<form action=\"index.php?act=login_next\" method=\"post\">";
             echo "<input type=\"text\" name=\"username\" placeholder=\"用户名\"><br>";
             echo "<input type=\"password\" name=\"password\" placeholder=\"密码\"><br>";
@@ -85,10 +89,7 @@ require "funcs.php";
                     header("location: index.php?act=home");
                     // Redirect to home
                 } else {
-                    $awa=$user_info["password"];
                     echo "<script>alert('密码错误');</script>";
-                    echo "<script>alert('$password')</script>";
-                    echo "<script>alert('$awa')</script>";
                     echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
                 }
             }

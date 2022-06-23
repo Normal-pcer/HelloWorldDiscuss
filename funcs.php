@@ -66,6 +66,7 @@ function encode_pass($pass)
     } else {
         $pass = hash('sha256', $pass);
     }
+    return $pass;
 }
 
 function is_password_true($password, $real)
