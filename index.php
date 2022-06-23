@@ -175,6 +175,11 @@ require "funcs.php";
             $conn->query("UPDATE users SET username='" . $_POST["name"] .
                 "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
             header("location: index.php?act=space&uid=" . get_user_information_from_cookie()["user_id"]);
+        } else if ($act == "change-password") {
+            $conn->query("UPDATE users SET password='" . encode_pass($_POST["password"]) .
+                "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
+            echo "<script>alert('密码修改成功，请重新登录')</script>";
+            header("location: index.php?act=logout");
         }
         ?>
     </div>
