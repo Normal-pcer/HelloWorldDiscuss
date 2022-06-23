@@ -1,14 +1,15 @@
 {
+    "discussversion":"0.1 Beta",
     "database.host": "localhost",
-    "database.name": "discuss",
-    "database.user": "discuss",
+    "database.name": "hwdisc",
+    "database.user": "hwdisc",
     "database.pass": "test123",
     "title": "Hello World",
     "server.salt.enabled": true,
     "server.salt.value": 5394811005627065,
     "plugin.userfile.enabled": true,
     "plugin.userfile.max_size": "10MB",
-    "discussversion":"0.1 Beta",
     "plugin.countview.enabled": true,
-    "plugin.countview.user_only": true
+    "plugin.countview.user_only": true,
+    "plugin.shouiplocation.enabled": false
 }

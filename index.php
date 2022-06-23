@@ -139,7 +139,8 @@ require "funcs.php";
             // Insert discuss into database
             //get unique_id by $timestamp
             $timestampn = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ($dis_id, '$user_id', '$title', '$content', 0, 0)");
+            $ipaddress=getusrip();
+            $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', '$title', '$content', '$user_id', '0', '$timestampn', '1', '$ipaddress')");
             // Redirect to home
             header("location: index.php?act=home");
         } else if ($act == "discuss") {
