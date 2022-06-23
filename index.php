@@ -305,23 +305,4 @@
         ?>
     </div>
 </body>
-<footer>
-    <div class="container-fluid" style="padding-top: 40px;">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="jumbotron">
-                    <div class="container">
-                        <center>
-
-                            <p>Copyright© 2022 All Rights Reserved. </p>
-                            <p>正在开发中</p>
-                        </center>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
 </html>
