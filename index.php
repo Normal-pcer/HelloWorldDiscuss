@@ -55,8 +55,15 @@
             echo "</form>";
         } else if ($act == "login_next") {
             // Login next
+            require "funcs.php";
             $username = $_POST["username"];
-            $password = $_POST["password"];
+            if($config["server.salt.enabled"]){
+                $password = encode_pass($_POST["password"].$config["server.salt.value"]);
+            }
+            else{
+                $password = encode_pass($_POST["password"]);
+            }
+            
             // Is there a user with this username?
             $result = $conn->query("SELECT * FROM users WHERE username='$username'");
             if ($result->num_rows == 0) {
@@ -74,7 +81,10 @@
                     header("location: index.php?act=home");
                     // Redirect to home
                 } else {
+                    $awa=$user_info["password"];
                     echo "<script>alert('密码错误');</script>";
+                    echo "<script>alert('')</script>";
+                    echo "<script>alert('$awa')</script>";
                     echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
                 }
             }
