@@ -8,6 +8,8 @@
         die("请登录后进入后台！");
     }
     else{
+       //getuserinfo 
+        $userinfo=get_user_information_from_cookie();
         //到喵呜服务器，在线检测更新
         $config = json_decode(file_get_contents('config.json'), true);
         $db_host = $config['database.host'];

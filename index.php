@@ -160,7 +160,8 @@ require "funcs.php";
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
             $timestampnow2 = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ('$dis_id', '$user_id', 'none', '$content', '$floor', 0)");
+            $ipaddress1=getusrip();
+            $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', 'none', '$content', '$user_id', '$floor', '$timestampnow2', '1', '$ipaddress1')");
 
             echo $_COOKIE["uid"];
             // Redirect to the discuss
