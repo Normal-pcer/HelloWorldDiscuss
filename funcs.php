@@ -90,6 +90,4 @@ function get_ip_location($ipaddress){
 	//php内置函数，将处理成类似于url参数的格式的字符串  转换成数组
 	parse_str($location,$ip_location);
 	return $ip_location['addr'];
-
-
 }
