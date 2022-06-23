@@ -9,5 +9,6 @@
     "plugin.userfile.enabled": true,
     "plugin.userfile.max_size": "10MB",
     "plugin.countview.enabled": true,
-    "plugin.countview.user_only": true
+    "plugin.countview.user_only": true,
+    "plugin.point.enabled": true
 }

@@ -167,9 +167,11 @@ require "funcs.php";
             // Show space page
             require "space.php";
         } else if ($act == "del") {
-
-
             del_discuss($_GET["id"], $_GET["floor"]);
+        } else if ($act == "change-username") {
+            $conn->query("UPDATE users SET username='" . $_POST["name"] .
+                "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
+            header("location: index.php?act=space&uid=" . get_user_information_from_cookie()["user_id"]);
         }
         ?>
     </div>

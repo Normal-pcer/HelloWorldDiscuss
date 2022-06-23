@@ -80,7 +80,14 @@ function get_user_information_from_cookie()
     $user_id = $_COOKIE['uid'];
     $user_password = $_COOKIE['pass_sha256'];
 
-    return get_user_information_from_uid($user_id, true, $user_password);
+    $result =  get_user_information_from_uid($user_id, false);
+    if ($result) {
+        if ($user_password == $result['password']) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
 
 
