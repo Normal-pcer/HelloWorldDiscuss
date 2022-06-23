@@ -83,6 +83,7 @@
     echo "<br>";
     echo "<br>";
     echo "<h3>主要设置概览：</h3>";
+    echo "<h5>绿色：正常 灰色：无影响 棕色：注意</h5>";
     echo "<ul>";
     //加盐开启状态
     if($config["server.salt.enabled"]){
@@ -111,9 +112,19 @@
       echo "<li><font color=grey>未开启查看数</font></li>";
     }
 
+    if($config["plugin.point.enabled"]){
+
+      echo "<li><font color=grey>积分系统已启用</font><li>";
+
+    }
+    else{
+      echo "<li><font color=grey>积分系统未启用</font><li>";
+    }
+
     echo "<li><font size=3>php版本号:".substr(PHP_VERSION,0,3)."(建议使用7.0以上版本）</font>";
     echo "</ul>";
 
+    
 
 ?>
 </div>
