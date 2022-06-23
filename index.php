@@ -1,4 +1,9 @@
-<?php ob_start();?>
+<?php 
+ob_start();
+//这样以后就可以改header
+require "funcs.php";
+//所需要的函数
+?>
 <html>
 
 <head>
@@ -37,6 +42,7 @@
     <div class="main">
         <?php
         // Get action
+
         ob_start();
         if (array_key_exists("act", $act)) {
             $act = $act["act"];
@@ -55,7 +61,6 @@
             echo "</form>";
         } else if ($act == "login_next") {
             // Login next
-            require "funcs.php";
             $username = $_POST["username"];
             if($config["server.salt.enabled"]){
                 $password = encode_pass($_POST["password"].$config["server.salt.value"]);
@@ -73,7 +78,6 @@
                 $user_info = $result->fetch_assoc();
                 // Check password
                 // Get password SHA256
-                require "funcs.php";
                 if (is_password_true($password, $user_info["password"])) {
                     // Set cookie
                     // header("location: write_into_cookie.php?id=" . $user_info["user_id"]);
@@ -83,7 +87,7 @@
                 } else {
                     $awa=$user_info["password"];
                     echo "<script>alert('密码错误');</script>";
-                    echo "<script>alert('')</script>";
+                    echo "<script>alert('$password')</script>";
                     echo "<script>alert('$awa')</script>";
                     echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
                 }
@@ -127,7 +131,6 @@
                 if ($result->num_rows != 0) {
                     echo "用户名已被使用";
                 } else {
-                    require 'funcs.php';
                     // Get password SHA256
                     $password_sha256 = encode_pass($password);
                     // Get user id
@@ -190,7 +193,7 @@
             // Show space page
             require "space.php";
         } else if ($act == "del") {
-            require "funcs.php";
+
 
             del_discuss($_GET["id"], $_GET["floor"]);
         }
