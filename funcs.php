@@ -152,16 +152,17 @@ function getusrip(){
     $ip = $_SERVER['REMOTE_ADDR'];
     if (false !== strpos($ip, ','))
     $ip = reset(explode(',', $ip));
-    return $ip;
+    return $ip
+    /*
+
+    处理多层代理的情况
+    
+    或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
+    
+    */;
 }
 }
 
-/*
 
-处理多层代理的情况
-
-或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
-
-*/
 
 

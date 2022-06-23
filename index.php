@@ -14,29 +14,7 @@
 </head>
 
 <body>
-    <ul class="nav nav-tabs">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.php"><?php echo $config["title"]; ?></a>
-        </div>
-
-        <li><a href="index.php?act=home" data-toggle="tab">首页</a></li>
-
-        <li><a href="index.php?act=parts" data-toggle="tab">分区</a></li>
-
-
-        <?php
-
-        if (isset($_COOKIE["uid"])) {
-            $spacelink = $_COOKIE["uid"];
-            echo "<li><a href=index.php?act=space&uid=" . $spacelink . " data-toggle=tab\">个人空间</a></li>";
-            echo "<li><a href=index.php?act=logout data-toggle=tab\">退出登录</a></li>";
-        } else {
-            echo "<li><a href=\"index.php?act=login\" data-toggle=tab\">登录</a></li>";
-            echo "<li><a href=\"index.php?act=signup\" data-toggle=tab\">注册</a></li>";
-        }
-        ?>
-
-    </ul>
+    require "navbar.php";
     <?php
 
     // Connect to MySQL
@@ -94,7 +72,8 @@
                     header("location: index.php?act=home");
                     // Redirect to home
                 } else {
-                    echo "密码错误";
+                    echo "<script>alert('密码错误');</script>";
+                    echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
                 }
             }
         } else if ($act == "logout") {
