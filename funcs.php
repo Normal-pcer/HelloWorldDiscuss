@@ -207,15 +207,18 @@ function antisql($data)
 function add_discuss_countview($dis_id)
 {
     $config = json_decode(file_get_contents('config.json'), true);
-    $db_host = $config['database.host'];
-    $db_name = $config['database.name'];
-    $db_user = $config['database.user'];
-    $db_pass = $config['database.pass'];
+    if (($config['plugin.countview.user_only'] && get_user_information_from_cookie() != false) ||
+        ($config['plugin.countview.user_only'] == false)
+    ) {
+        $db_host = $config['database.host'];
+        $db_name = $config['database.name'];
+        $db_user = $config['database.user'];
+        $db_pass = $config['database.pass'];
 
-    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-    $sql = "UPDATE `discusses` SET `countview` = `countview` + 1 WHERE `dis_id` = '$dis_id'";
-    $result = $conn->query($sql);
-
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+        $sql = "UPDATE `discusses` SET `countview` = `countview` + 1 WHERE `dis_id` = '$dis_id'";
+        $result = $conn->query($sql);
+    }
     return true;
 }
 
