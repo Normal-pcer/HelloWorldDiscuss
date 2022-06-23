@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    require "navbar.php";
+    <?php require "navbar.php";?>
     <?php
 
     // Connect to MySQL
