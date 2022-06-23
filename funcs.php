@@ -102,7 +102,6 @@ function encode_pass($pass)
     } else {
         $pass = hash('sha256', $pass);
     }
-
     return $pass;
 }
 

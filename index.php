@@ -41,6 +41,7 @@ require "funcs.php";
     <div class="main">
         <?php
         // Get action
+
         ob_start();
         if (array_key_exists("act", $act)) {
             $act = $act["act"];
@@ -52,6 +53,7 @@ require "funcs.php";
             require "home.php";
         } else if ($act == "login") {
             // Login page
+
             echo "<form action=\"index.php?act=login_next\" method=\"post\">";
             echo "<input type=\"text\" name=\"username\" placeholder=\"用户名\"><br>";
             echo "<input type=\"password\" name=\"password\" placeholder=\"密码\"><br>";
@@ -104,7 +106,6 @@ require "funcs.php";
                 if ($result->num_rows != 0) {
                     echo "用户名已被使用";
                 } else {
-                    require 'funcs.php';
                     // Get password SHA256
                     $password_sha256 = encode_pass($password);
                     // Get user id
@@ -138,7 +139,8 @@ require "funcs.php";
             // Insert discuss into database
             //get unique_id by $timestamp
             $timestampn = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ($dis_id, '$user_id', '$title', '$content', 0, 0)");
+            $ipaddress=getusrip();
+            $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', '$title', '$content', '$user_id', '0', '$timestampn', '1', '$ipaddress')");
             // Redirect to home
             header("location: index.php?act=home");
         } else if ($act == "discuss") {
@@ -158,7 +160,8 @@ require "funcs.php";
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
             $timestampnow2 = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ('$dis_id', '$user_id', 'none', '$content', '$floor', 0)");
+            $ipaddress1=getusrip();
+            $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', 'none', '$content', '$user_id', '$floor', '$timestampnow2', '1', '$ipaddress1')");
 
             echo $_COOKIE["uid"];
             // Redirect to the discuss
