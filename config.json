@@ -1,8 +1,7 @@
 {
-    "discussversion":"0.1 Beta",
     "database.host": "localhost",
-    "database.name": "hwdisc",
-    "database.user": "hwdisc",
+    "database.name": "discuss",
+    "database.user": "discuss",
     "database.pass": "test123",
     "title": "Hello World",
     "server.salt.enabled": true,
@@ -11,5 +10,6 @@
     "plugin.userfile.max_size": "10MB",
     "plugin.countview.enabled": true,
     "plugin.countview.user_only": true,
+    "plugin.point.enabled": true,
     "plugin.shouiplocation.enabled": false
 }

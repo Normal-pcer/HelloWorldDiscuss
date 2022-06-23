@@ -7,5 +7,6 @@
     "server.salt.enabled": true,
     "server.salt.value": 5394811005627065,
     "plugin.userfile.enabled": true,
-    "plugin.userfile.max_size": "10MB"
+    "plugin.userfile.max_size": "10MB",
+    "plugin.shouiplocation.enabled": false
 }

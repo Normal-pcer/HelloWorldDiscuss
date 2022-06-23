@@ -80,7 +80,14 @@ function get_user_information_from_cookie()
     $user_id = $_COOKIE['uid'];
     $user_password = $_COOKIE['pass_sha256'];
 
-    return get_user_information_from_uid($user_id, true, $user_password);
+    $result =  get_user_information_from_uid($user_id, false);
+    if ($result) {
+        if ($user_password == $result['password']) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
 
 
@@ -223,10 +230,11 @@ function add_discuss_countview($dis_id)
 
 function check_user_login_token($username, $password)
 {
-    $r_pass = get_user_information_from_username("admin")['password'];
+    $r_pass = get_user_information_from_username($username);
 
     if ($r_pass == false)
         die("ERR_USER_NOT_EXIST" . $username);
+    $r_pass = $r_pass['password'];
 
     $res = is_password_true($password, $r_pass);
     if ($res) {
