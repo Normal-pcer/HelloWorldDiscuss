@@ -1,4 +1,6 @@
-<?php ob_start();?>
+<?php ob_start();
+require "funcs.php";
+?>
 <html>
 
 <head>
@@ -15,9 +17,11 @@
 </head>
 
 <body>
-    
-    <?php require "navbar.php"//获取navbar 直接引用;?>
+
+    <?php require "navbar.php" //获取navbar 直接引用;
+    ?>
     <?php
+
 
     // Connect to MySQL
     $conn = new mysqli(
@@ -54,39 +58,12 @@
             echo "<input type=\"submit\" value=\"登录\">";
             echo "</form>";
         } else if ($act == "login_next") {
-            // Login next
-            require "funcs.php";
-            $username = $_POST["username"];
-            if($config["server.salt.enabled"]){
-                $password = encode_pass($_POST["password"].$config["server.salt.value"]);
-            }
-            else{
-                $password = encode_pass($_POST["password"]);
-            }
-            
-            // Is there a user with this username?
-            $result = $conn->query("SELECT * FROM users WHERE username='$username'");
-            if ($result->num_rows == 0) {
-                echo "用户不存在";
+            if (check_user_login_token($_POST["username"], $_POST["password"])) {
+                setcookie("uid", get_user_information_from_username($_POST["username"])["user_id"], time() + 3600 * 24 * 7);
+                setcookie("pass_sha256", encode_pass($_POST["password"]), time() + 3600 * 24 * 7);
+                header("Location: index.php?act=home");
             } else {
-                // Get user info from database
-                $user_info = $result->fetch_assoc();
-                // Check password
-                // Get password SHA256
-                require "funcs.php";
-                if (is_password_true($password, $user_info["password"])) {
-                    // Set cookie
-                    // header("location: write_into_cookie.php?id=" . $user_info["user_id"]);
-                    setcookie("uid", $user_info["user_id"], time() + 2592000); // 30 days
-                    header("location: index.php?act=home");
-                    // Redirect to home
-                } else {
-                    $awa=$user_info["password"];
-                    echo "<script>alert('密码错误');</script>";
-                    echo "<script>alert('')</script>";
-                    echo "<script>alert('$awa')</script>";
-                    echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
-                }
+                die("ERR_LOGIN_FAIL");
             }
         } else if ($act == "logout") {
             // Logout
@@ -190,11 +167,12 @@
             // Show space page
             require "space.php";
         } else if ($act == "del") {
-            require "funcs.php";
+
 
             del_discuss($_GET["id"], $_GET["floor"]);
         }
         ?>
     </div>
 </body>
+
 </html>
