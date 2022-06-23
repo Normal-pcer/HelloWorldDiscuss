@@ -41,12 +41,41 @@ function get_user_information_from_uid($user_id, $check_pass = false, $pass = 0)
     }
 }
 
+function get_user_information_from_username($username)
+{
+    // Read config.json
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    // Connect to database
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    // Get user information from database
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
+    $result = $conn->query($sql);
+
+    // Check if user exists
+    if ($result->num_rows > 0) {
+        // Get user information
+        $row = $result->fetch_assoc();
+
+        // Return user id
+        return $row;
+    } else {
+        return false;
+    }
+}
+
 function get_user_information_from_cookie()
 {
     // Get cookie
     if (!isset($_COOKIE['uid'])) {
         return false;
-    } 
+    }
+
 
     $user_id = $_COOKIE['uid'];
     $user_password = $_COOKIE['pass_sha256'];
@@ -71,32 +100,37 @@ function encode_pass($pass)
 
 function is_password_true($password, $real)
 {
-    return encode_pass($password) == $real;
+    if (encode_pass($password) == $real)
+        return true;
+    else
+        return false;
 }
 
-function get_ip_location($ipaddress){
+function get_ip_location($ipaddress)
+{
     //这一段直接抄csdn上的了
     $ch = curl_init();
-    $url = 'https://whois.pconline.com.cn/ipJson.jsp?ip='.$ipaddress;
+    $url = 'https://whois.pconline.com.cn/ipJson.jsp?ip=' . $ipaddress;
     curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	//https SSL
-	curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-	//获取
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //https SSL
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    //获取
     $location = curl_exec($ch);
     //至此已经获得ip属地，关闭连接
-	curl_close($ch);
+    curl_close($ch);
     //转码
-    $location = mb_convert_encoding($location, 'utf-8','GB2312');
-    $location = substr($location, strlen('({')+strpos($location, '({'),(strlen($location) - strpos($location, '})'))*(-1));
-	//将截取的字符串$location中的‘，’替换成‘&’   将字符串中的‘：‘替换成‘=’
-	$location = str_replace('"',"",str_replace(":","=",str_replace(",","&",$location)));
-	//php内置函数，将处理成类似于url参数的格式的字符串  转换成数组
-	parse_str($location,$ip_location);
-	return $ip_location['addr'];
-
-
+    $location = mb_convert_encoding($location, 'utf-8', 'GB2312');
+    $location = substr($location, strlen('({') + strpos($location, '({'), (strlen($location) - strpos($location, '})')) * (-1));
+    //将截取的字符串$location中的‘，’替换成‘&’   将字符串中的‘：‘替换成‘=’
+    $location = str_replace('"', "", str_replace(":", "=", str_replace(",", "&", $location)));
+    //php内置函数，将处理成类似于url参数的格式的字符串  转换成数组
+    parse_str(
+        $location,
+        $ip_location
+    );
+    return $ip_location['addr'];
 }
 
 function get_discuss($dis_id, $floor)
@@ -145,27 +179,56 @@ function del_discuss($dis_id, $floor)
         die("ERR_NOT_OWNER");
     }
 }
-function getusrip(){
+function getusrip()
+{
     $unknown = 'unknown';
-    if ( isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown) ) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } elseif ( isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown) ) {
-    $ip = $_SERVER['REMOTE_ADDR'];
-    if (false !== strpos($ip, ','))
-    $ip = reset(explode(',', $ip));
-    return $ip
-    /*
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], $unknown)) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        if (false !== strpos($ip, ','))
+            $ip = reset(explode(',', $ip));
+        return $ip
+            /*
 
     处理多层代理的情况
     
     或者使用正则方式：$ip = preg_match("/[\d\.]{7,15}/", $ip, $matches) ? $matches[0] : $unknown;
     
     */;
+    }
 }
-}
-function antisql($data) {
+function antisql($data)
+{
     return addslashes(strip_tags(trim($data)));
-} 
+}
 
+function add_discuss_countview($dis_id)
+{
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
 
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $sql = "UPDATE `discusses` SET `countview` = `countview` + 1 WHERE `dis_id` = '$dis_id'";
+    $result = $conn->query($sql);
 
+    return true;
+}
+
+function check_user_login_token($username, $password)
+{
+    $r_pass = get_user_information_from_username("admin")['password'];
+
+    if ($r_pass == false)
+        die("ERR_USER_NOT_EXIST" . $username);
+
+    $res = is_password_true($password, $r_pass);
+    if ($res) {
+        return true;
+    } else {
+        return false;
+    }
+}

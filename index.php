@@ -1,8 +1,5 @@
-<?php 
-ob_start();
-//这样以后就可以改header
+<?php ob_start();
 require "funcs.php";
-//所需要的函数
 ?>
 <html>
 
@@ -20,9 +17,11 @@ require "funcs.php";
 </head>
 
 <body>
-    
-    <?php require "navbar.php"//获取navbar 直接引用;?>
+
+    <?php require "navbar.php" //获取navbar 直接引用;
+    ?>
     <?php
+
 
     // Connect to MySQL
     $conn = new mysqli(
@@ -54,44 +53,19 @@ require "funcs.php";
             require "home.php";
         } else if ($act == "login") {
             // Login page
-            if(isset($_COOKIE)){
-                echo "<script>alert('您已登录，无需重复登录');</script>";
-                echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php\" />";
-            }
+
             echo "<form action=\"index.php?act=login_next\" method=\"post\">";
             echo "<input type=\"text\" name=\"username\" placeholder=\"用户名\"><br>";
             echo "<input type=\"password\" name=\"password\" placeholder=\"密码\"><br>";
             echo "<input type=\"submit\" value=\"登录\">";
             echo "</form>";
         } else if ($act == "login_next") {
-            // Login next
-            $username = $_POST["username"];
-            if($config["server.salt.enabled"]){
-                $password = encode_pass($_POST["password"].$config["server.salt.value"]);
-            }
-            else{
-                $password = encode_pass($_POST["password"]);
-            }
-            
-            // Is there a user with this username?
-            $result = $conn->query("SELECT * FROM users WHERE username='$username'");
-            if ($result->num_rows == 0) {
-                echo "用户不存在";
+            if (check_user_login_token($_POST["username"], $_POST["password"])) {
+                setcookie("uid", get_user_information_from_username($_POST["username"])["user_id"], time() + 3600 * 24 * 7);
+                setcookie("pass_sha256", encode_pass($_POST["password"]), time() + 3600 * 24 * 7);
+                header("Location: index.php?act=home");
             } else {
-                // Get user info from database
-                $user_info = $result->fetch_assoc();
-                // Check password
-                // Get password SHA256
-                if (is_password_true($password, $user_info["password"])) {
-                    // Set cookie
-                    // header("location: write_into_cookie.php?id=" . $user_info["user_id"]);
-                    setcookie("uid", $user_info["user_id"], time() + 2592000); // 30 days
-                    header("location: index.php?act=home");
-                    // Redirect to home
-                } else {
-                    echo "<script>alert('密码错误');</script>";
-                    echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php?act=login\" />";
-                }
+                die("ERR_LOGIN_FAIL");
             }
         } else if ($act == "logout") {
             // Logout
@@ -201,4 +175,5 @@ require "funcs.php";
         ?>
     </div>
 </body>
+
 </html>

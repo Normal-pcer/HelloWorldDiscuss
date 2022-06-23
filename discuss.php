@@ -27,10 +27,10 @@
 </style>
 
 <?php
-require 'funcs.php';
 
 // Show discuss page
 $dis_id = $_GET["id"];
+add_discuss_countview($dis_id);
 // Get discuss info from database
 // Sort with "floor"
 $result = $conn->query("SELECT * FROM discusses WHERE dis_id='$dis_id' ORDER BY floor ASC");

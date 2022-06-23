@@ -40,7 +40,9 @@ $sql = "CREATE TABLE IF NOT EXISTS `discusses` (
     `text` text NOT NULL,
     `user_id` int(11) NOT NULL,
     `countview` int(11) NOT NULL DEFAULT '0',
-    `floor` int(11) NOT NULL DEFAULT '0'
+    `floor` int(11) NOT NULL DEFAULT '0', 
+    `sendtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    PRIMARY KEY (`sendtime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
 
