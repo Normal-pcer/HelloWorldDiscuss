@@ -24,7 +24,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
     `username` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
     `email` varchar(255) NOT NULL,
-    `usergroup` int(11) NOT NULL,
+    `usergroup` int(11) NOT NULL DEFAULT '1',
     `points` int(11) NOT NULL DEFAULT '0',
     `banned` int(11) NOT NULL DEFAULT '0',
     `unban_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -64,7 +64,15 @@ $conn->query($sql);
 require 'funcs.php';
 $pass = encode_pass('123456');
 
-$sql = "INSERT INTO `users` (`username`, `password`, `email`, `points`) VALUES ('admin', '$pass', 'admin@example.com', '0');";
+$sql = "INSERT INTO `users` (`username`, `password`, `email`, `points`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '0');";
+$conn->query($sql);
+
+// Add admin usergroup
+$sql = "INSERT INTO `usergroups` (`title`) VALUES ('admin');";
+$conn->query($sql);
+
+// Add normal-user group
+$sql = "INSERT INTO `usergroups` (`title`) VALUES ('user');";
 $conn->query($sql);
 
 // Add default part

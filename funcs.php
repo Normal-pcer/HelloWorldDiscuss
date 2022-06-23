@@ -26,7 +26,7 @@ function get_user_information_from_uid($user_id, $check_pass = false, $pass = 0)
 
         if ($check_pass) {
             // Check if password is correct
-            if (password_verify($pass, $row['password'])) {
+            if (is_password_true($pass, $row['password'])) {
                 // Return user information
                 return $row;
             } else {
@@ -44,6 +44,10 @@ function get_user_information_from_uid($user_id, $check_pass = false, $pass = 0)
 function get_user_information_from_cookie()
 {
     // Get cookie
+    if (!isset($_COOKIE['uid'])) {
+        return false;
+    } 
+
     $user_id = $_COOKIE['uid'];
     $user_password = $_COOKIE['pass_sha256'];
 
@@ -90,4 +94,51 @@ function get_ip_location($ipaddress){
 	//php内置函数，将处理成类似于url参数的格式的字符串  转换成数组
 	parse_str($location,$ip_location);
 	return $ip_location['addr'];
+}
+
+function get_discuss($dis_id, $floor)
+{
+    // Read config.json
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    // Connect to database
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    // Get discuss information from database
+    $sql = "SELECT * FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
+    $result = $conn->query($sql);
+    $result = $result->fetch_assoc();
+    return $result;
+}
+
+function del_discuss($dis_id, $floor)
+{
+    // check if user is the owner of the discuss or admin
+    $user = get_user_information_from_cookie();
+    if ($user == false) {
+        die("ERR_NOT_LOGIN");
+    }
+    $dis = get_discuss($dis_id, $floor);
+
+    if ($user['user_id'] == $dis['user_id'] || $user['usergroup'] == 0) {
+        // Read config.json
+        $config = json_decode(file_get_contents('config.json'), true);
+        $db_host = $config['database.host'];
+        $db_name = $config['database.name'];
+        $db_user = $config['database.user'];
+        $db_pass = $config['database.pass'];
+
+        // Connect to database
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+        // Delete discuss from database
+        $sql = "DELETE FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
+        $result = $conn->query($sql);
+    } else {
+        die("ERR_NOT_OWNER");
+    }
 }

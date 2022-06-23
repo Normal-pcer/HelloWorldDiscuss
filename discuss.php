@@ -27,6 +27,8 @@
 </style>
 
 <?php
+require 'funcs.php';
+
 // Show discuss page
 $dis_id = $_GET["id"];
 // Get discuss info from database
@@ -43,12 +45,21 @@ while ($row = $result->fetch_assoc()) {
         $user_info = $result_user->fetch_assoc();
         echo "<p>" . $user_info["username"] . "：</p>";
         echo $row["text"];
+
+        $login = get_user_information_from_cookie();
+        if ($login != false && $row["user_id"] == $login["user_id"]) {
+            echo "<br><a href='index.php?act=del&id=" . $dis_id . "&floor=" . $row["floor"] . "'>删除</a>";
+        }
     } else {
         echo "<h1>" . $row["title"] . "</h1>";
         // get username
+        $login = get_user_information_from_cookie();
         $result_user = $conn->query("SELECT * FROM users WHERE user_id='" . $row["user_id"] . "'");
         $user_info = $result_user->fetch_assoc();
         echo "<p><a href=index.php?act=space&uid=" . $user_info["user_id"] . ">作者：" . $user_info["username"] . "</a></p>";
+        if ($login != false && $row["user_id"] == $login["user_id"]) {
+            echo "<a href='index.php?act=del&id=" . $dis_id . "&floor=" . $row["floor"] . "'>删除</a><br>";
+        }
         echo $row["text"];
         echo "
 <hr>";

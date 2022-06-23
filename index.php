@@ -186,7 +186,7 @@
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
             $timestampnow2 = time();
-            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id, sendtime) VALUES ('$dis_id', '$user_id', 'none', '$content', '$floor', 0, $timestampnow2)");
+            $conn->query("INSERT INTO discusses (dis_id, user_id, title, text, floor, part_id) VALUES ('$dis_id', '$user_id', 'none', '$content', '$floor', 0)");
 
             echo $_COOKIE["uid"];
             // Redirect to the discuss
@@ -194,6 +194,10 @@
         } else if ($act == "space") {
             // Show space page
             require "space.php";
+        } else if ($act == "del") {
+            require "funcs.php";
+
+            del_discuss($_GET["id"], $_GET["floor"]);
         }
         ?>
     </div>
