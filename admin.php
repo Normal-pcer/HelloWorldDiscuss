@@ -54,8 +54,10 @@
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">首页</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">安全</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">运营</a>
+    <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">平台对接</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">用户</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">SEO</a>
+    <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">扩展</a>
   </div>
 </div>
 
@@ -86,9 +88,17 @@
       echo "<li><font color=\"#9bef51\" size=3 >已启用密码加盐</font></li>";
     }
     else{
-      echo "<li><font color=brown size=3>未启用密码加盐</font></li>";
+      echo "<li><font color=brown>未启用密码加盐,启用可有效保证密码安全</font></li>";
     }
-    echo "<li><font size=3>php版本号:".substr(PHP_VERSION,0,3)."</font>";
+
+    if($config["plugin.shouiplocation.enabled"]){
+      echo "<li><font color=\"#9bef51\" size=3>已启用ip属地显示</font></li>";
+    }
+    else{
+      echo "<li><font color=brown>未启用ip属地显示（启用可有效防治网暴，冒充热点当事人等行为）</font></li>";
+    }
+
+    echo "<li><font size=3>php版本号:".substr(PHP_VERSION,0,3)."(建议使用7.0以上版本）</font>";
     echo "</ul>";
 
 
