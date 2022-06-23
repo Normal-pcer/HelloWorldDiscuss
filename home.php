@@ -12,10 +12,10 @@ echo "<ul class=\"articles\">";
 $windowlocationhref="window.location.href = \"index.php?act=create-dis\";" ;
 if(isset($_COOKIE["uid"])){
     echo "<button class=\"mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent\" onclick=jumpto(\"index.php?act=create-dis\");>发布主题</button>";
+
 }
 else{
     echo "<button class=\"mdui-btn mdui-btn-raised mdui-ripple\" disabled>登录即可发布主题</button>";
-    
 }
 
 // Get articles from database
