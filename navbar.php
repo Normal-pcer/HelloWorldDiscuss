@@ -1,9 +1,9 @@
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide ">
   <div class="mdui-toolbar mdui-color-theme">
-    <a href="javascript:inst.toggle();;" class="mdui-btn mdui-btn-icon">
-      <i class="mdui-icon material-icons">menu</i>
+    <a href="index.php?act=home" class="mdui-btn mdui-btn-icon">
+      <i class="mdui-icon material-icons">home</i>
     </a>
-    <a href="javascript:;" class="mdui-typo-title">Title</a>
+    <a href="javascript:;" class="mdui-typo-title"><?php echo $config["title"];?></a>
     <div class="mdui-toolbar-spacer"></div>
     <a href="javascript:developalert();" class="mdui-btn mdui-btn-icon">
       <i class="mdui-icon material-icons">search</i>
@@ -14,9 +14,13 @@
     <a href="javascript:developalert();" class="mdui-btn mdui-btn-icon">
     <i class="mdui-icon material-icons">notifications</i>
     </a>
+    <a href="javascript:developalert();" class="mdui-btn mdui-btn-icon">
+    <i class="mdui-icon material-icons">&#xe7fd;</i>
+    </a>
     <a href="javascript:;" class="mdui-btn mdui-btn-icon">
       <i class="mdui-icon material-icons">more_vert</i>
     </a>
+   
   </div>
   <div class="mdui-tab mdui-color-theme" mdui-tab>
   <?php
