@@ -168,7 +168,15 @@ function del_discuss($dis_id, $floor)
     }
     $dis = get_discuss($dis_id, $floor);
 
-    if ($user['user_id'] == $dis['user_id'] || $user['usergroup'] == 0) {
+    $config = json_decode(file_get_contents('config.json'), true);
+    $conn = new mysqli($config['database.host'], $config['database.user'], $config['database.pass'], $config['database.name']);
+    $sql = "SELECT * FROM `usergroups` WHERE `group_id` = '" . $user["usergroup"] . "'";
+    $result = $conn->query($sql);
+    $group = $result->fetch_assoc();
+
+    if (
+        $user['user_id'] == $dis['user_id'] || $group['delete_everyone_dis'] == 1
+    ) {
         // Read config.json
         $config = json_decode(file_get_contents('config.json'), true);
         $db_host = $config['database.host'];
@@ -242,4 +250,35 @@ function check_user_login_token($username, $password)
     } else {
         return false;
     }
+}
+
+function get_group_information_from_group_id($group_id)
+{
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $sql = "SELECT * FROM `usergroups` WHERE `group_id` = '" . $group_id . "'";
+    $result = $conn->query($sql);
+    $result = $result->fetch_assoc();
+    return $result;
+}
+
+function get_group_information_from_user_id($user_id)
+{
+    $config = json_decode(file_get_contents('config.json'), true);
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $sql = "SELECT * FROM `users` WHERE `user_id` = '$user_id'";
+    $result = $conn->query($sql);
+    $result = $result->fetch_assoc();
+
+    return get_group_information_from_group_id($result["usergroup"]);
 }

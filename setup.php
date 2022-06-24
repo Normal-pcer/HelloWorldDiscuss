@@ -67,6 +67,7 @@ $conn->query($sql);
 $sql = "CREATE TABLE IF NOT EXISTS `usergroups` (
     `group_id` int(11) NOT NULL AUTO_INCREMENT,
     `title` varchar(255) NOT NULL,
+    `delete_everyone_dis` int(11) NOT NULL DEFAULT '1',
     PRIMARY KEY (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
@@ -75,11 +76,11 @@ $conn->query($sql);
 require 'funcs.php';
 $pass = encode_pass('123456');
 
-$sql = "INSERT INTO `users` (`username`, `password`, `email`, `point`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '0');";
+$sql = "INSERT INTO `users` (`username`, `password`, `email`, `point`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '1');";
 $conn->query($sql);
 
 // Add admin usergroup
-$sql = "INSERT INTO `usergroups` (`title`) VALUES ('admin');";
+$sql = "INSERT INTO `usergroups` (`title`, `delete_everyone_dis`) VALUES ('admin', 1);";
 $conn->query($sql);
 
 // Add normal-user group

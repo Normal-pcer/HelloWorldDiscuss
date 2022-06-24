@@ -187,8 +187,9 @@ require "funcs.php";
                 "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
             echo "<script>alert('密码修改成功，请重新登录')</script>";
             header("location: index.php?act=logout");
-        }
-        else{
+        } else if ($act == "admin") {
+            header("location: admin.php");
+        } else {
             echo "<script>alert('操作未定义')</script>";
             header("location: index.php");
         }

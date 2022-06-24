@@ -22,7 +22,7 @@
     </a>
 
   </div>
-  <div class="mdui-tab mdui-color-theme" mdui-tab>
+  <div class="mdui-tab mdui-color-theme" mdui-tab id="nav">
     <?php
 
     if (isset($_COOKIE["uid"])) {
