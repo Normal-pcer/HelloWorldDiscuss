@@ -43,8 +43,8 @@ while ($row = $result->fetch_assoc()) {
         else{
             echo "<font folor=grey>发表于$sendtimedate</font>";
         }
-        
-        if ($login != false && $row["user_id"] == $login["user_id"]) {
+
+        if ($login != false && ($row["user_id"] == $login["user_id"] || get_group_information_from_user_id(($login["user_id"]))["delete_everyone_dis"] == 1)) {
             echo "<a href='index.php?act=del&id=" . $dis_id . "&floor=" . $row["floor"] . "'>删除</a><br>";
         }
         echo $row["text"];
