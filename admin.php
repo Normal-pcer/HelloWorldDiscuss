@@ -114,10 +114,10 @@
     //查看数开启状态
     if($config["plugin.countview.enabled"]){
       if($config["plugin.countview.user_only"]){
-        echo "<li><font color=\"#9bef51\" size=3>已启用查看数，已开启去重</font></li>";
+        echo "<li><font color=\"#9bef51\" size=3>已启用查看数，已开启只统计用户访问</font></li>";
       }
       else{
-        echo "<li><font color=brown>已启用查看数，但是未开启去重，建议开启</font></li>";
+        echo "<li><font color=brown>已启用查看数，但是未开启只统计用户访问，为防止刷浏览量，建议开启</font></li>";
       }
     }
     else{
@@ -126,11 +126,11 @@
 
     if($config["plugin.point.enabled"]){
 
-      echo "<li><font color=grey>积分系统已启用</font><li>";
+      echo "<li><font color=grey>积分系统已启用</font></li>";
 
     }
     else{
-      echo "<li><font color=grey>积分系统未启用</font><li>";
+      echo "<li><font color=grey>积分系统未启用</font></li>";
     }
 
     echo "<li><font size=3>php版本号:".substr(PHP_VERSION,0,3)."(建议使用7.0以上版本）</font>";
