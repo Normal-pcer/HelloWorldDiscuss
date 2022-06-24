@@ -1,5 +1,6 @@
 {
     "discussversion":"0.1 Beta",
+    "themecolor":"indigo",
     "database.host": "localhost",
     "database.name": "hwdisc",
     "database.user": "hwdisc",
@@ -12,5 +13,5 @@
     "plugin.countview.enabled": true,
     "plugin.countview.user_only": true,
     "plugin.point.enabled": true,
-    "plugin.shouiplocation.enabled": false
+    "plugin.shouiplocation.enabled": true
 }

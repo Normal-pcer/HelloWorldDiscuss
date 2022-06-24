@@ -147,4 +147,5 @@
             confirmButtonText: '确认'
         });
     }
+    var inst = new mdui.Drawer('#drawer');
 </script>

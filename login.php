@@ -1,14 +1,15 @@
 <?php
 // Read config.json
     $config = json_decode(file_get_contents('config.json'), true);
+
 ?>
 <html>
   <head>
-    <title>登录界面</title>
+    <title>登录 <?php echo $config["title"]; ?></title>
     <meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/login.css" />
   </head>
-  <body>
+  <body >
       	<form name="login" action="index.php?act=login_next" method="post">
      		 <?php echo "<h1>".$config["title"]."登录</h1>";?>
             <input class=input_1 id=username name="username"  placeholder=用户名><br />
