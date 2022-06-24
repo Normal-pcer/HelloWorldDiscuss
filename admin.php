@@ -54,6 +54,7 @@
   </div>
   <div class="mdui-tab mdui-color-theme" mdui-tab>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">首页</a>
+    <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">基础</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">安全</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">运营</a>
     <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">平台对接</a>
