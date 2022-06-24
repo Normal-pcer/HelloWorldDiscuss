@@ -21,9 +21,11 @@
         $curlcheckforupdate = curl_init();
         curl_setopt($curlcheckforupdate, CURLOPT_URL, "https://miaowuawa.cn/hwdupdate.txt");
         curl_setopt($curlcheckforupdate, CURLOPT_RETURNTRANSFER, 1); 
+        curl_setopt($curlcheckforupdate, CURLOPT_USERAGENT,'Helloworlddiscuss updatechecker(curl)');
         $nowversion=curl_exec($curlcheckforupdate);
-        
-        
+        $httpCode = curl_getinfo($curlcheckforupdate,CURLINFO_HTTP_CODE);
+        //获取喵呜服务器上的公告
+
 
     }
 
@@ -32,7 +34,7 @@
     <title><?php echo $config["title"]."管理后台";?></title>
     <?php require "cssandjs.php"?>
 </head>
-<body>
+<body class="mdui-theme-primary-blue">
 <div class="mdui-appbar">
   <div class="mdui-toolbar mdui-color-theme">
     <a href="javascript:;" class="mdui-btn mdui-btn-icon">
@@ -66,9 +68,17 @@
 <br>
 <h1><?php echo $config["title"]."管理后台";?> 首页</h1>
 <?php 
-
     $usingversion=$config["discussversion"];
-    echo "<font color=\"#9bef51\" size=4>最新版本:$nowversion</font>";
+    if($httpCode!=200){
+
+      echo "<font color=brown> 更新检测服务器异常 </font>";
+
+    }
+    else{
+      $usingversion=$config["discussversion"];
+      echo "<font color=\"#9bef51\" size=4>最新版本:$nowversion</font>";
+    }
+   
     if($usingversion==$nowversion){
       echo "<font color=\"#9bef51\" size=4> （您正在使用最新版本）</font>";
     }
@@ -76,6 +86,8 @@
       $tmpusingversion=$config["discussversion"];
       echo "<font color=brown size=4> 您正在使用：$tmpusingversion<br>（为确保安全，请尽快升级）</font>";
     }
+    echo "<br>";
+    echo "<p>官方公告：这个功能还没写</p>";
 
     echo "<br>";
     echo "<br>";

@@ -187,6 +187,10 @@ require "funcs.php";
             echo "<script>alert('密码修改成功，请重新登录')</script>";
             header("location: index.php?act=logout");
         }
+        else{
+            echo "<script>alert('操作未定义')</script>";
+            header("location: index.php");
+        }
         ?>
     </div>
 </body>
