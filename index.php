@@ -16,7 +16,7 @@ require "funcs.php";
     <?php require "cssandjs.php" ?>
 </head>
 
-<body>
+<body class=mdui-theme-primary-<?php echo $config["themecolor"]?>>
 
     <?php require "navbar.php" //获取navbar 直接引用;
     ?>
@@ -33,6 +33,12 @@ require "funcs.php";
     ?>
 
     <div class="title-bar">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <h1><?php echo $config["title"]; ?></h1>
     </div>
 
@@ -180,6 +186,10 @@ require "funcs.php";
                 "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
             echo "<script>alert('密码修改成功，请重新登录')</script>";
             header("location: index.php?act=logout");
+        }
+        else{
+            echo "<script>alert('操作未定义')</script>";
+            header("location: index.php");
         }
         ?>
     </div>
