@@ -17,6 +17,12 @@ $db_user = $config['database.user'];
 $db_pass = $config['database.pass'];
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
+// Delete old tables
+$conn->query("DROP TABLE IF EXISTS `users`");
+$conn->query("DROP TABLE IF EXISTS `discusses`");
+$conn->query("DROP TABLE IF EXISTS `usergroups`");
+$conn->query("DROP TABLE IF EXISTS `parts`");
+
 // Create tables
 // `users`
 $sql = "CREATE TABLE IF NOT EXISTS `users` (
@@ -24,10 +30,12 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
     `username` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
     `email` varchar(255) NOT NULL,
-    `usergroup` int(11) NOT NULL DEFAULT '1',
-    `points` int(11) NOT NULL DEFAULT '0',
-    `banned` int(11) NOT NULL DEFAULT '0',
-    `unban_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `usergroup` int(11) NOT NULL DEFAULT 1,
+    `point` int(11) NOT NULL DEFAULT '0',
+    `ban` int(11) NOT NULL DEFAULT '0',
+    `bantimes` int(11) NOT NULL DEFAULT 0,
+    `qianming` varchar(255) NOT NULL DEFAULT '这个人很懒，什么都没留下',
+    `avatar` varchar(255) NOT NULL DEFAULT './images/default-ava.png',
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
@@ -41,7 +49,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `discusses` (
     `user_id` int(11) NOT NULL,
     `countview` int(11) NOT NULL DEFAULT '0',
     `floor` int(11) NOT NULL DEFAULT '0', 
-    `sendtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    `sendtime` int(11) NOT NULL DEFAULT 0, 
     `sendip` varchar(255) NOT NULL DEFAULT '127.0.0.1',
     PRIMARY KEY (`dis_id`, `floor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
@@ -67,7 +75,7 @@ $conn->query($sql);
 require 'funcs.php';
 $pass = encode_pass('123456');
 
-$sql = "INSERT INTO `users` (`username`, `password`, `email`, `points`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '0');";
+$sql = "INSERT INTO `users` (`username`, `password`, `email`, `point`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '0');";
 $conn->query($sql);
 
 // Add admin usergroup

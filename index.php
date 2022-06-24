@@ -118,7 +118,8 @@ require "funcs.php";
                     $user_id = $conn->query("SELECT MAX(user_id) FROM users")->fetch_assoc()["MAX(user_id)"] + 1;  // Get next user id
                     // Insert user into database
                     $timestampnow = time();
-                    $conn->query("INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `point`, `qianming`, `ban`, `avatar`, `bantimes`, `isadmin`) VALUES ('$user_id', '$username', '$password_sha256', '$email', '0', '这个人很懒，什么都没有写', '0', 'no', '0', '0')");
+                    $sql = "INSERT INTO `users` (`user_id`, `username`, `password`, `email`) VALUES ('$user_id', '$username', '$password_sha256', '$email')";
+                    $conn->query($sql);
                     // Set cookie
                     ob_start();
                     setcookie("uid", $user_id, time() + 2592000); // 30 days
