@@ -28,7 +28,7 @@ while ($row = $result->fetch_assoc()) {
             $user_info = $user_info->fetch_assoc();
             $liulanliang=$row["countview"];
             echo "<li><a href=\"index.php?act=discuss&id=" . $row["dis_id"] . "\">" .
-                        $row["title"] . "</a> <div align=right> <a href='space.php?uid=" . $user_info["user_id"] .
+            $row["title"] . "</a> <div align=right> <a href='index.php?act=space&uid=" . $user_info["user_id"] .
             "'> 楼主：" . $user_info["username"] . " </a>";
         if ($config['plugin.countview.enabled']) {
             echo "<i class=\"mdui-icon material-icons\">&#xe417;</i><font color=grey>$liulanliang</font>";
