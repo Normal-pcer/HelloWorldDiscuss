@@ -54,6 +54,7 @@ require "funcs.php";
         } else {
             $act = "home";
         }
+
         // Load action
         if ($act == "home") {
             require "home.php";
@@ -66,6 +67,7 @@ require "funcs.php";
             echo "<input type=\"submit\" value=\"登录\">";
             echo "</form>";
         } else if ($act == "login_next") {
+
             if (check_user_login_token($_POST["username"], $_POST["password"])) {
                 setcookie("uid", get_user_information_from_username($_POST["username"])["user_id"], time() + 3600 * 24 * 7);
                 setcookie("pass_sha256", encode_pass($_POST["password"]), time() + 3600 * 24 * 7);
