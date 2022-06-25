@@ -16,7 +16,7 @@ require "funcs.php";
     <?php require "cssandjs.php" ?>
 </head>
 
-<body class=mdui-theme-primary-<?php echo $config["themecolor"]?>>
+<body class=mdui-theme-primary-<?php echo $config["themecolor"] ?>>
 
     <?php require "navbar.php" //获取navbar 直接引用;
     ?>
@@ -32,19 +32,10 @@ require "funcs.php";
     );
     ?>
 
-    <div class="title-bar">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1><?php echo $config["title"]; ?></h1>
-    </div>
 
 
 
-    <div class="main">
+    <div class="main" style="padding-top:120px">
         <?php
         // Get action
 
@@ -148,7 +139,7 @@ require "funcs.php";
             // Insert discuss into database
             //get unique_id by $timestamp
             $timestampn = time();
-            $ipaddress=getusrip();
+            $ipaddress = getusrip();
             $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', '$title', '$content', '$user_id', '0', '$timestampn', '1', '$ipaddress')");
             // Redirect to home
             header("location: index.php?act=home");
@@ -169,7 +160,7 @@ require "funcs.php";
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
             $timestampnow2 = time();
-            $ipaddress1=getusrip();
+            $ipaddress1 = getusrip();
             $conn->query("INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `floor`, `sendtime`, `countview`, `sendip`) VALUES ('$dis_id', '0', 'none', '$content', '$user_id', '$floor', '$timestampnow2', '1', '$ipaddress1')");
 
             echo $_COOKIE["uid"];
