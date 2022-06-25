@@ -248,6 +248,7 @@ function check_user_login_token($username, $password)
     if ($res) {
         return true;
     } else {
+        die($password . " " . encode_pass($password) . " " . $r_pass);
         return false;
     }
 }

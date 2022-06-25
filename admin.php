@@ -37,9 +37,11 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-
+        
         $config["server.salt.enabled"] = false;
         file_put_contents("config.json", json_encode($config));
+
+        $conn->query("UPDATE `users` SET `password`='" . encode_pass($config["server.admin.password"]) . "' WHERE `user_id`=1");
     } else if ($act == "server.salt.enable") {
         $result = $conn->query("SELECT * FROM users");
         if (mysqli_num_rows($result) > 1) {
@@ -48,6 +50,9 @@ if (array_key_exists("act", $_GET)) {
 
         $config["server.salt.enabled"] = true;
         file_put_contents("config.json", json_encode($config));
+
+        $conn->query("UPDATE `users` SET `password`='" . encode_pass($config["server.admin.password"]) . "' WHERE `user_id`=1");
+
     } else if ($act == "users-more") {
         $sql = "SELECT * FROM `usergroups`";
         $result = $conn->query($sql);
