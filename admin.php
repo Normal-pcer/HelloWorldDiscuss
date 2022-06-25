@@ -32,9 +32,20 @@ if (get_user_information_from_cookie() != false) {
 if (array_key_exists("act", $_GET)) {
     $act = $_GET["act"];
     if ($act == "server.salt.disable") {
+        // check if there is only one user
+        $result = $conn->query("SELECT * FROM users");
+        if (mysqli_num_rows($result) > 1) {
+            die("ERR_HAVE_USER");
+        }
+
         $config["server.salt.enabled"] = false;
         file_put_contents("config.json", json_encode($config));
     } else if ($act == "server.salt.enable") {
+        $result = $conn->query("SELECT * FROM users");
+        if (mysqli_num_rows($result) > 1) {
+            die("ERR_HAVE_USER");
+        }
+
         $config["server.salt.enabled"] = true;
         file_put_contents("config.json", json_encode($config));
     } else if ($act == "users-more") {
@@ -198,7 +209,7 @@ if (array_key_exists("act", $_GET)) {
 
         ?>
         <h2 id="plugin">插件管理</h2>
-        <p id="example3-tab-user">hi!</p>
+        <h3></h3>
     </div>
 </body>
 

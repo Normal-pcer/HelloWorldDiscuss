@@ -74,9 +74,27 @@ $conn->query($sql);
 
 // Add admin user
 require 'funcs.php';
-$pass = encode_pass('123456');
 
-$sql = "INSERT INTO `users` (`username`, `password`, `email`, `point`, `usergroup`) VALUES ('admin', '$pass', 'admin@example.com', '0', '1');";
+// Get a random number as salt
+$salt = rand(100000, 999999);
+$salt = md5($salt);
+
+// Get a random number as admin password
+$admin_pass = rand(100000, 999999);
+$admin_pass = md5($admin_pass);
+
+// write into config.json
+$config['server.admin.username'] = 'admin';
+$config['server.admin.password'] = $admin_pass;
+$config['server.salt.enabled'] = true;
+$config['server.salt.value'] = $salt;
+$conffile = fopen('config.json', 'w');
+fwrite($conffile, json_encode($config));
+fclose($conffile);
+
+$admin_pass = encode_pass($admin_pass);
+
+$sql = "INSERT INTO `users` (`username`, `password`, `email`, `point`, `usergroup`) VALUES ('admin', '$admin_pass', 'admin@example.com', '0', '1');";
 $conn->query($sql);
 
 // Add admin usergroup
@@ -92,7 +110,7 @@ $sql = "INSERT INTO `parts` (`title`) VALUES ('Default');";
 $conn->query($sql);
 
 // Add a discuss to default part
-$sql = "INSERT INTO `discusses` (`part_id`, `title`, `text`, `user_id`, `countview`, `floor`) VALUES (1, 'Welcome to Discuss', '<p>欢迎使用Hello World Discuss，管理员账号admin，默认密码123456，请尽快更改! </p>', 1, 0, 0);";
+$sql = "INSERT INTO `discusses` (`part_id`, `title`, `text`, `user_id`, `countview`, `floor`) VALUES (1, 'Welcome to Discuss', '<p>欢迎使用Hello World Discuss，管理员账号admin，密码 " . $config["server.admin.password"] . " </p>', 1, 0, 0);";
 $conn->query($sql);
 
 // Create file setup.lock

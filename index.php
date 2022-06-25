@@ -181,10 +181,18 @@ require "funcs.php";
         } else if ($act == "change-username") {
             $conn->query("UPDATE users SET username='" . $_POST["name"] .
                 "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
+            if (get_user_information_from_cookie()["user_id"] == 1) {
+                $config["server.admin.username"] = $_POST["name"];
+                save_config($config);
+            }
             header("location: index.php?act=space&uid=" . get_user_information_from_cookie()["user_id"]);
         } else if ($act == "change-password") {
             $conn->query("UPDATE users SET password='" . encode_pass($_POST["password"]) .
                 "' WHERE user_id='" . get_user_information_from_cookie()["user_id"] . "'");
+            if (get_user_information_from_cookie()["user_id"] == 1) {
+                $config["server.admin.password"] = $_POST["password"];
+                save_config($config);
+            }
             echo "<script>alert('密码修改成功，请重新登录')</script>";
             header("location: index.php?act=logout");
         } else if ($act == "admin") {

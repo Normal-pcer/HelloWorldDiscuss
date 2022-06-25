@@ -282,3 +282,9 @@ function get_group_information_from_user_id($user_id)
 
     return get_group_information_from_group_id($result["usergroup"]);
 }
+
+function save_config($config)
+{
+    $config = json_encode($config);
+    file_put_contents('config.json', $config);
+}
