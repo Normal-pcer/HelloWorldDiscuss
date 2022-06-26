@@ -40,21 +40,24 @@ if ($result1->num_rows == 0) {
 } else {
     while ($row = mysqli_fetch_assoc($result1)) {
         $username = $row["username"];
+        $user_id = $row["user_id"];
+        $user_avatar = $row["avatar"];
     }
 }
 ?>
 
 <head>
-    <?php 
-        echo "<title>" . $username . "的个人空间</title>";
-        require "cssandjs.php";
+    <?php
+    echo "<title>" . $username . "的个人空间</title>";
+    require "cssandjs.php";
     ?>
-   
+
 
 </head>
 
 <body>
     <div class="main">
-        <?php echo "<h1>$username</h1>" ?>
+        <img src="<?php echo $user_avatar; ?>" alt="头像加载失败" height="60px" style="display:inline-block;" />
+        <?php echo "<h1 style=\"display:inline-block;\">$username</h1>" ?>
     </div>
 </body>

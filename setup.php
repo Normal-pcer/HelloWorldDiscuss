@@ -35,7 +35,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
     `ban` int(11) NOT NULL DEFAULT '0',
     `bantimes` int(11) NOT NULL DEFAULT 0,
     `qianming` varchar(255) NOT NULL DEFAULT '这个人很懒，什么都没留下',
-    `avatar` varchar(255) NOT NULL DEFAULT './images/default-ava.png',
+    `avatar` varchar(255) NOT NULL DEFAULT './images/default-ava.jpg',
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
