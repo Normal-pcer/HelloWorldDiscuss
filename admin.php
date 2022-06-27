@@ -37,7 +37,7 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-        
+
         $config["server.salt.enabled"] = false;
         file_put_contents("config.json", json_encode($config));
 
@@ -52,7 +52,6 @@ if (array_key_exists("act", $_GET)) {
         file_put_contents("config.json", json_encode($config));
 
         $conn->query("UPDATE `users` SET `password`='" . encode_pass($config["server.admin.password"]) . "' WHERE `user_id`=1");
-
     } else if ($act == "users-more") {
         $sql = "SELECT * FROM `usergroups`";
         $result = $conn->query($sql);
@@ -96,6 +95,18 @@ if (array_key_exists("act", $_GET)) {
 
         $sql = "UPDATE `usergroups` SET `delete_everyone_dis` = '$delete_everyone_dis' WHERE `group_id` = '$gid'";
         $result = $conn->query($sql);
+    } else if ($act == "plugin.countview.enable") {
+        $config["plugin.countview.enabled"] = true;
+        file_put_contents("config.json", json_encode($config));
+    } else if ($act == "plugin.countview.disable") {
+        $config["plugin.countview.enabled"] = false;
+        save_config($config);
+    } else if ($act == "plugin.countview.user_only.enable") {
+        $config["plugin.countview.user_only"] = true;
+        save_config($config);
+    } else if ($act == "plugin.countview.user_only.disable") {
+        $config["plugin.countview.user_only"] = false;
+        save_config($config);
     }
 }
 
@@ -106,7 +117,7 @@ if (array_key_exists("act", $_GET)) {
     <?php require "cssandjs.php" ?>
 </head>
 
-<body class="mdui-theme-primary-blue">
+<body class="mdui-theme-primary-<?php echo $config["themecolor"]; ?>">
     <div class="mdui-appbar">
         <div class="mdui-toolbar mdui-color-theme">
             <a href="javascript:;" class="mdui-btn mdui-btn-icon">
@@ -137,14 +148,21 @@ if (array_key_exists("act", $_GET)) {
 
     <div class=main>
         <br>
+        <p><a href="index.php?act=home">回到主页</a></p>
         <br>
         <h1><?php echo $config["title"] . "管理后台"; ?></h1>
+        <p>我们信任您已经从系统管理员那里了解了日常注意事项。</p>
+        <p>总结起来无非这三点：</p>
+        <ol>
+            <li>尊重别人的隐私。</li>
+            <li>输入前先考虑（后果和风险）。</li>
+            <li>能力越大，责任越大。</li>
+        </ol>
         <h2 id="safety">安全</h2>
         <h3>框架版本</h3>
         <?php
         $usingversion = $config["discussversion"];
         if ($httpCode != 200) {
-
             echo "<font color=brown> 更新检测服务器异常 </font>";
         } else {
             $usingversion = $config["discussversion"];
@@ -214,7 +232,19 @@ if (array_key_exists("act", $_GET)) {
 
         ?>
         <h2 id="plugin">插件管理</h2>
-        <h3></h3>
+        <h3>查看数/Countview</h3>
+        <?php
+        if ($config["plugin.countview.enabled"]) {
+            echo "<a href=\"admin.php?act=plugin.countview.disable\"><font color=\"#9bbd51\" size=4> 已开启查看数，点击关闭 </font> <br></a>";
+            if ($config["plugin.countview.user_only"]) {
+                echo "<a href=\"admin.php?act=plugin.countview.user_only.disable\"><font color=\"#9bbd51\" size=4> 只统计注册用户，点击切换 </font></a><br>";
+            } else {
+                echo "<a href=\"admin.php?act=plugin.countview.user_only.enable\"><font color=grey size=4> 统计所有访客，点击切换 </font></a> ";
+            }
+        } else {
+            echo "<a href=\"admin.php?act=plugin.countview.enable\"><font color=grey size=4> 已关闭查看数，点击开启 </font></a> <br> ";
+        }
+        ?>
     </div>
 </body>
 
