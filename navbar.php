@@ -14,6 +14,13 @@
     <a href="javascript:developalert();" class="mdui-btn mdui-btn-icon">
       <i class="mdui-icon material-icons">notifications</i>
     </a>
+    <?php
+    if (is_admin_from_cookie()) {
+      echo '<a href="admin.php" class="mdui-btn mdui-btn-icon" title="admin">
+        <i class="mdui-icon material-icons">build</i>
+      </a>';
+    }
+    ?>
     <a href="javascript:developalert();" class="mdui-btn mdui-btn-icon">
       <i class="mdui-icon material-icons">&#xe7fd;</i>
     </a>

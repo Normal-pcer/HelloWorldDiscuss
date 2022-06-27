@@ -20,25 +20,16 @@
             window.editor = K.create('#editor_id');
         });
     </script>
-<!-- MDUI CSS -->
-<link
-  rel="stylesheet"
-  href="https://jsd.miaowuawa.cn/npm/mdui@1.0.1/dist/css/mdui.min.css"
-  integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
-  crossorigin="anonymous"
-/>
+    <!-- MDUI CSS -->
+    <link rel="stylesheet" href="https://jsd.miaowuawa.cn/npm/mdui@1.0.1/dist/css/mdui.min.css" integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw" crossorigin="anonymous" />
 
-<!-- MDUI JavaScript -->
-<script
-  src="https://jsd.miaowuawa.cn/npm/mdui@1.0.1/dist/js/mdui.min.js"
-  integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
-  crossorigin="anonymous"
-></script>
-<script>
-    function jumpto(url) {
-       window.location.href = url ;
-}
-</script>
+    <!-- MDUI JavaScript -->
+    <script src="https://jsd.miaowuawa.cn/npm/mdui@1.0.1/dist/js/mdui.min.js" integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A" crossorigin="anonymous"></script>
+    <script>
+        function jumpto(url) {
+            window.location.href = url;
+        }
+    </script>
     <style>
         html {
             height: 100%;
@@ -84,7 +75,7 @@
 
         div.main {
             padding-left: 100px;
-            top: 100px;
+            /* top: 100px; */
         }
 
         ul.articles {
@@ -119,33 +110,35 @@
             padding: 0.5em;
         }
     </style>
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-   //定义所需要的函数
-    function developalert(){
-        Swal.fire({
-            title: '错误',
-            text: '这个功能正在开发中',
-            type: 'error',
-            confirmButtonText: '确认'
-        });
-    }
-    function loginerr(){
-        Swal.fire({
-            title: '错误',
-            text: '登录信息有误，请检查后重试(3秒后自动跳转）',
-            type: 'error',
-            confirmButtonText: '确认',
-            onClose: 'window.location.href=index.php?act.login'
-        });
-    }
-    function no_auth(){
-        Swal.fire({
-            title: '错误',
-            text: '未登录，请登录后再试',
-            type: 'error',
-            confirmButtonText: '确认'
-        });
-    }
-    var inst = new mdui.Drawer('#drawer');
-</script>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        //定义所需要的函数
+        function developalert() {
+            Swal.fire({
+                title: '错误',
+                text: '这个功能正在开发中',
+                type: 'error',
+                confirmButtonText: '确认'
+            });
+        }
+
+        function loginerr() {
+            Swal.fire({
+                title: '错误',
+                text: '登录信息有误，请检查后重试(3秒后自动跳转）',
+                type: 'error',
+                confirmButtonText: '确认',
+                onClose: 'window.location.href=index.php?act.login'
+            });
+        }
+
+        function no_auth() {
+            Swal.fire({
+                title: '错误',
+                text: '未登录，请登录后再试',
+                type: 'error',
+                confirmButtonText: '确认'
+            });
+        }
+        var inst = new mdui.Drawer('#drawer');
+    </script>

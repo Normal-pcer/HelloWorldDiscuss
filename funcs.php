@@ -288,3 +288,21 @@ function save_config($config)
     $config = json_encode($config);
     file_put_contents('config.json', $config);
 }
+
+function is_admin($uid)
+{
+    $grp = get_group_information_from_user_id($uid);
+    if ($grp == false)  return false;
+    if ($grp['group_id'] == 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function is_admin_from_cookie()
+{
+    $uid = get_user_information_from_cookie();
+    if ($uid == false) return false;
+    return is_admin($uid['user_id']);
+}
