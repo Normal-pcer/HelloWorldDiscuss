@@ -283,6 +283,12 @@ function get_group_information_from_user_id($user_id)
     return get_group_information_from_group_id($result["usergroup"]);
 }
 
+function get_config()
+{
+    $config = json_decode(file_get_contents('config.json'), true);
+    return $config;
+}
+
 function save_config($config)
 {
     $config = json_encode($config);
@@ -299,4 +305,40 @@ function show_avatar_and_username($user_id, $title = false)
         return '<img src="' . $user['avatar'] . '" alt = "' . $user['username'] . '" height="30px" style="display: inline-block;">' .
             '<span>' . $user['username'] . '</span>';
     }
+}
+
+function upload_file($filename, $user_id)
+{
+    $config = get_config();
+    if (!$config["plugin.upload.enabled"]) {
+        die("ERR_UPLOAD_DISABLE");
+    }
+    if (!isset($_FILES[$filename])) {
+        die("ERR_FILE_NOT_EXIST");
+    }
+    $file = $_FILES[$filename];
+    $file_name = $file['name'];
+    $file_size = $file['size'];
+    $file_tmp = $file['tmp_name'];
+
+    // check size
+    if ($file_size > $config["plugin.upload.max_size"]) {
+        die("ERR_FILE_TOO_BIG");
+    }
+    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    // write into sql
+    $db_host = $config['database.host'];
+    $db_name = $config['database.name'];
+    $db_user = $config['database.user'];
+    $db_pass = $config['database.pass'];
+
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $sql = "INSERT INTO `uploads` (`user_id`, `title`) VALUES ('$user_id', '$file_name')";
+    $result = $conn->query($sql);
+    $upload_id = $conn->insert_id;
+
+    // move
+    $file_path = "./source/upload/" . $upload_id . "." . $file_ext;
+    move_uploaded_file($file_tmp, $file_path);
+    return $upload_id;
 }

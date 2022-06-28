@@ -1,1 +1,19 @@
-{"discussversion":"0.1 Beta","themecolor":"red","database.host":"localhost","database.name":"discuss","database.user":"discuss","database.pass":"test123","title":"Hello World","server.salt.enabled":true,"server.salt.value":"1b473a0224521de334bd3f244b1e6f1f","plugin.userfile.enabled":true,"plugin.userfile.max_size":"10MB","plugin.countview.enabled":true,"plugin.countview.user_only":true,"plugin.point.enabled":true,"plugin.shouiplocation.enabled":true,"server.admin.username":"admin","server.admin.password":"347a99c69b22657f8d6c3a18b305a022"}
+{
+    "discussversion": "0.1 Beta",
+    "themecolor": "red",
+    "database.host": "localhost",
+    "database.name": "discuss",
+    "database.user": "discuss",
+    "database.pass": "test123",
+    "title": "Hello World",
+    "server.salt.enabled": true,
+    "server.salt.value": "b2dda752a047c3617d47de989b933df3",
+    "plugin.upload.enabled": true,
+    "plugin.upload.max_size": "10485760",
+    "plugin.countview.enabled": true,
+    "plugin.countview.user_only": true,
+    "plugin.point.enabled": true,
+    "plugin.shouiplocation.enabled": true,
+    "server.admin.username": "admin",
+    "server.admin.password": "4fd52c5c785f6646c98560ce2e785e6b"
+}

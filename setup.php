@@ -118,7 +118,7 @@ $sql = "INSERT INTO `parts` (`title`) VALUES ('Default');";
 $conn->query($sql);
 
 // Add a discuss to default part
-$sql = "INSERT INTO `discusses` (`part_id`, `title`, `text`, `user_id`, `countview`, `floor`) VALUES (1, 'Welcome to Discuss', '<p>欢迎使用Hello World Discuss，管理员账号admin，密码 " . $config["server.admin.password"] . " </p>', 1, 0, 0);";
+$sql = "INSERT INTO `discusses` (`dis_id`, `part_id`, `title`, `text`, `user_id`, `countview`, `floor`) VALUES (1, 1, 'Welcome to Discuss', '欢迎使用Hello World Discuss，管理员账号admin，密码 " . $config["server.admin.password"] . " ', 1, 0, 0);";
 $conn->query($sql);
 
 // Create file setup.lock

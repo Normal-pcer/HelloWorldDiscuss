@@ -190,6 +190,18 @@ require "funcs.php";
             header("location: index.php?act=logout");
         } else if ($act == "admin") {
             header("location: admin.php");
+        } else if ($act == "upload") {
+            // check if user logined
+            if (get_user_information_from_cookie() == false) {
+                die("ERR_NOT_LOGIN");
+            }
+            echo "<form action=index.php?act=upload-next method=\"POST\" enctype=\"multipart/form-data\">
+                <input type=\"file\" name=\"file\" id=\"file\"/>
+                <input type=\"submit\" value=\"上传\"/>
+            </form>
+            ";
+        } else if ($act == "upload-next") {
+            upload_file('file', get_user_information_from_cookie()["user_id"]);
         } else {
             echo "<script>alert('操作未定义')</script>";
             header("location: index.php");
