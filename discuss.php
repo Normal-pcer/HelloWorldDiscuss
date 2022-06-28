@@ -21,7 +21,7 @@ while ($row = $result->fetch_assoc()) {
         // get username
         $result_user = $conn->query("SELECT username FROM users WHERE user_id='" . $row["user_id"] . "'");
         $user_info = $result_user->fetch_assoc();
-        echo "<p>" . $user_info["username"] . "：</p>";
+        echo "<p>" . show_avatar_and_username($row['user_id']) . "：</p>";
         echo $row["text"];
 
         $login = get_user_information_from_cookie();
@@ -36,7 +36,7 @@ while ($row = $result->fetch_assoc()) {
         $user_info = $result_user->fetch_assoc();
         $sendtimedate=date("Y年n月j日 G点i分s秒",$row["sendtime"]);
         $iploc=get_ip_location($row["sendip"]);
-        echo "<p><a href=index.php?act=space&uid=" . $user_info["user_id"] . ">作者：" . $user_info["username"] . "</a></p>";
+        echo "<p><a href=index.php?act=space&uid=" . $user_info["user_id"] . ">" . show_avatar_and_username($user_info['user_id']) . "</a></p>";
         if($config["plugin.shouiplocation.enabled"]){
             echo "<font color=grey>#1楼（楼主） 发表于".$sendtimedate."<br>IP属地: ".$iploc."</font><br>";
         }

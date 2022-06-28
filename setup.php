@@ -72,6 +72,14 @@ $sql = "CREATE TABLE IF NOT EXISTS `usergroups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
 
+// `files`
+$sql = "CREATE TABLE IF NOT EXISTS `files` (
+    `file_id` int(11) NOT NULL AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `title` varchar(255) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+
 // Add admin user
 require 'funcs.php';
 

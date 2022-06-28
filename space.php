@@ -57,6 +57,6 @@ if ($result1->num_rows == 0) {
 
 <body>
     <div class="main" style="padding-top: 100px">
-        <?php show_avatar_and_username(get_user_information_from_cookie()["user_id"], true); ?>
+        <?php echo show_avatar_and_username(get_user_information_from_cookie()["user_id"], true); ?>
     </div>
 </body>

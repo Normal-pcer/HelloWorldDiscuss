@@ -293,10 +293,10 @@ function show_avatar_and_username($user_id, $title = false)
 {
     $user = get_user_information_from_uid($user_id);
     if ($title) {
-        echo "<h1><img src=\"" . $user['avatar'] . "\" alt=\"" . $user['username'] . "\" height = \"60px\" style = \"display: inline-block;\" />";
-        echo $user['username'] . "</h1>";
+        return "<h1><img src=\"" . $user['avatar'] . "\" alt=\"" . $user['username'] . "\" height = \"60px\" style = \"display: inline-block;\" />" .
+            $user['username'] . "</h1>";
     } else {
-        echo '<p><img src="' . $user['avatar'] . '" alt = "' . $user['username'] . '" height=\"30px\" style=\"display: inline-block;\">';
-        echo '<span>' . $user['username'] . '</span></p>';
+        return '<img src="' . $user['avatar'] . '" alt = "' . $user['username'] . '" height="30px" style="display: inline-block;">' .
+            '<span>' . $user['username'] . '</span>';
     }
 }
