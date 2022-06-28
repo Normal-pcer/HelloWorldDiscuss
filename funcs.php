@@ -288,3 +288,10 @@ function save_config($config)
     $config = json_encode($config);
     file_put_contents('config.json', $config);
 }
+
+function show_avator_and_username($user_id)
+{
+    $user = get_user_information_from_uid($user_id);
+    echo '<p><img src="' . $user['avator'] . '" class="avator" height=\"30px\" style=\"display: inline-block;\">';
+    echo '<span class="username">' . $user['username'] . '</span></p>';
+}

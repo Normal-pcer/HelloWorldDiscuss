@@ -56,8 +56,7 @@ if ($result1->num_rows == 0) {
 </head>
 
 <body>
-    <div class="main">
-        <img src="<?php echo $user_avatar; ?>" alt="头像加载失败" height="60px" style="display:inline-block;" />
-        <?php echo "<h1 style=\"display:inline-block;\">$username</h1>" ?>
+    <div class="main" style="transform: scale(2)">
+        <?php show_avator_and_username(get_user_information_from_cookie()["user_id"]); ?>
     </div>
 </body>
