@@ -289,9 +289,14 @@ function save_config($config)
     file_put_contents('config.json', $config);
 }
 
-function show_avator_and_username($user_id)
+function show_avatar_and_username($user_id, $title = false)
 {
     $user = get_user_information_from_uid($user_id);
-    echo '<p><img src="' . $user['avator'] . '" class="avator" height=\"30px\" style=\"display: inline-block;\">';
-    echo '<span class="username">' . $user['username'] . '</span></p>';
+    if ($title) {
+        echo "<h1><img src=\"" . $user['avatar'] . "\" alt=\"" . $user['username'] . "\" height = \"60px\" style = \"display: inline-block;\" />";
+        echo $user['username'] . "</h1>";
+    } else {
+        echo '<p><img src="' . $user['avatar'] . '" alt = "' . $user['username'] . '" height=\"30px\" style=\"display: inline-block;\">';
+        echo '<span>' . $user['username'] . '</span></p>';
+    }
 }
