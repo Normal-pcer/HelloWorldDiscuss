@@ -187,7 +187,7 @@ function del_discuss($dis_id, $floor)
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
         // Delete discuss from database
-        $sql = "DELETE FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
+        $sql = "DELETE FROM `discusses` WHERE `dis_id` = '$dis_id'" . ($floor == 1) ? "" : " AND `floor` = '$floor'";
         $result = $conn->query($sql);
     } else {
         error_permission_denied("delete discuss");
@@ -340,4 +340,16 @@ function upload_file($filename, $user_id)
     $file_path = "./source/upload/" . $upload_id . "." . $file_ext;
     move_uploaded_file($file_tmp, $file_path);
     return $upload_id;
+}
+
+function comment_clean($comment)
+{
+    $config = get_config();
+    if ($config["plugin.comment-banner.enabled"]) {
+        require $config["plugin.comment-banner.processor"];
+        $result = comment_banner_process($comment);
+    } else {
+        $result = $comment;
+    }
+    return $result;
 }

@@ -55,5 +55,6 @@ while ($row = $result->fetch_assoc()) {
         echo "<textarea id=\"editor_id\" name=\"content\" placeholder='回复' rows=10 cols=50></textarea><br>";
         echo "<input type=\"submit\" value=\"回复\">";
         echo "</form>";
+        echo "<p>注：若存在违禁词，系统可能会进行处理</p>";
     }
 }

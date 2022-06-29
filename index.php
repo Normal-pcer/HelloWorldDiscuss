@@ -123,10 +123,11 @@ require "funcs.php";
             echo "<textarea id=\"editor_id\" name=\"content\" placeholder=\"内容\" rows=20 cols=100></textarea><br>";
             echo "<input type=\"submit\" value=\"发布\">";
             echo "</form>";
+            echo "<p>注意：若其中存在违禁词，系统可能会进行处理</p>";
         } else if ($act == "create-dis-next") {
             // Create discuss next
             $title = $_POST["title"];
-            $content = $_POST["content"];
+            $content = comment_clean($_POST["content"]);
             // Get user id
             $user_id = $_COOKIE["uid"];
             // Get discuss id
@@ -148,7 +149,7 @@ require "funcs.php";
             if (!isset($_COOKIE["uid"])) {
                 error_not_login();
             }
-
+            $content = comment_clean($content);
             $user_id = $_COOKIE["uid"];
             $floor = $conn->query("SELECT MAX(floor) FROM discusses WHERE dis_id='$dis_id'")->fetch_assoc()["MAX(floor)"] + 1;  // Get next floor
             // Insert discuss into database
