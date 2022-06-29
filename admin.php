@@ -37,7 +37,12 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-        
+        if (get_user_information_from_uid(1) != $config["server.admin.username"]) {
+            die("ERR_ADMIN_USERNAME_CHANGED");
+        }
+        if (!is_password_true($config["server.admin.password"], get_user_information_from_uid(1)["password"])) {
+            die("ERR_ADMIN_PASSWORD_CHANGED");
+        }
         $config["server.salt.enabled"] = false;
         file_put_contents("config.json", json_encode($config));
 
@@ -47,7 +52,12 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-
+        if (get_user_information_from_uid(1) != $config["server.admin.username"]) {
+            die("ERR_ADMIN_USERNAME_CHANGED");
+        }
+        if (!is_password_true($config["server.admin.password"], get_user_information_from_uid(1)["password"])) {
+            die("ERR_ADMIN_PASSWORD_CHANGED");
+        }
         $config["server.salt.enabled"] = true;
         file_put_contents("config.json", json_encode($config));
 
