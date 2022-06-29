@@ -1,14 +1,15 @@
 <html>
 <?php
 require "funcs.php";
+require "errors.php";
 
 if (get_user_information_from_cookie() != false) {
     //getuserinfo 
     $userinfo = get_user_information_from_cookie();
 
-    if (get_group_information_from_user_id($userinfo["user_id"])["group_id"] != 1)
-        die("ERR_USER_NOT_ADMIN");
-
+    if (get_group_information_from_user_id($userinfo["user_id"])["group_id"] != 1) {
+        error_permission_denied("管理后台");
+    }
     $config = json_decode(file_get_contents('config.json'), true);
     $db_host = $config['database.host'];
     $db_name = $config['database.name'];
@@ -26,7 +27,7 @@ if (get_user_information_from_cookie() != false) {
 
 
 } else {
-    die("ERR_NOT_LOGIN");
+    error_not_login();
 }
 
 if (array_key_exists("act", $_GET)) {
@@ -37,7 +38,7 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-        if (get_user_information_from_uid(1) != $config["server.admin.username"]) {
+        if (get_user_information_from_uid(1)["username"] != $config["server.admin.username"]) {
             die("ERR_ADMIN_USERNAME_CHANGED");
         }
         if (!is_password_true($config["server.admin.password"], get_user_information_from_uid(1)["password"])) {
@@ -52,7 +53,7 @@ if (array_key_exists("act", $_GET)) {
         if (mysqli_num_rows($result) > 1) {
             die("ERR_HAVE_USER");
         }
-        if (get_user_information_from_uid(1) != $config["server.admin.username"]) {
+        if (get_user_information_from_uid(1)["username"] != $config["server.admin.username"]) {
             die("ERR_ADMIN_USERNAME_CHANGED");
         }
         if (!is_password_true($config["server.admin.password"], get_user_information_from_uid(1)["password"])) {

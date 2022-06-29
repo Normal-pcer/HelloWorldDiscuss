@@ -164,7 +164,6 @@ function del_discuss($dis_id, $floor)
     // check if user is the owner of the discuss or admin
     $user = get_user_information_from_cookie();
     if ($user == false) {
-        die("ERR_NOT_LOGIN");
     }
     $dis = get_discuss($dis_id, $floor);
 
@@ -191,11 +190,11 @@ function del_discuss($dis_id, $floor)
         $sql = "DELETE FROM `discusses` WHERE `dis_id` = '$dis_id' AND `floor` = '$floor'";
         $result = $conn->query($sql);
     } else {
-        die("ERR_NOT_OWNER");
+        error_permission_denied("delete discuss");
     }
 }
 function getusrip()
-{
+{   
     $unknown = 'unknown';
     if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] && strcasecmp($_SERVER['HTTP_X_FORWARDED_FOR'], $unknown)) {
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];

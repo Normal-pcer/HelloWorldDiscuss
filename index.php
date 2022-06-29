@@ -51,12 +51,7 @@ require "funcs.php";
             require "home.php";
         } else if ($act == "login") {
             // Login page
-
-            echo "<form action=\"index.php?act=login_next\" method=\"post\">";
-            echo "<input type=\"text\" name=\"username\" placeholder=\"用户名\"><br>";
-            echo "<input type=\"password\" name=\"password\" placeholder=\"密码\"><br>";
-            echo "<input type=\"submit\" value=\"登录\">";
-            echo "</form>";
+            header("Location: login.php");
         } else if ($act == "login_next") {
 
             if (check_user_login_token($_POST["username"], $_POST["password"])) {
@@ -151,9 +146,7 @@ require "funcs.php";
             $content = $_POST["content"];
             // Get user id
             if (!isset($_COOKIE["uid"])) {
-                echo "<script>alert('请先登录！')</script>";
-                header("location: index.php?act=login");
-                die("请先登录");
+                error_not_login();
             }
 
             $user_id = $_COOKIE["uid"];
