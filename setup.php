@@ -36,6 +36,11 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
     `bantimes` int(11) NOT NULL DEFAULT 0,
     `qianming` varchar(255) NOT NULL DEFAULT '这个人很懒，什么都没留下',
     `avatar` varchar(255) NOT NULL DEFAULT './images/default-ava.jpg',
+    `likes` varchar(255) NOT NULL DEFAULT '',
+    `collects` varchar(255) NOT NULL DEFAULT '',
+    `follows` varchar(255) NOT NULL DEFAULT '',
+    `followeds` varchar(255) NOT NULL DEFAULT '',
+    `watches` varchar(255) NOT NULL DEFAULT '',
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
@@ -51,6 +56,9 @@ $sql = "CREATE TABLE IF NOT EXISTS `discusses` (
     `floor` int(11) NOT NULL DEFAULT '0', 
     `sendtime` int(11) NOT NULL DEFAULT 0, 
     `sendip` varchar(255) NOT NULL DEFAULT '127.0.0.1',
+    `like` int(11) NOT NULL DEFAULT 0,
+    `collect` int(11) NOT NULL DEFAULT 0,
+    `watch` int(11) NOT NULL DEFAULT 0,
     PRIMARY KEY (`dis_id`, `floor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 $conn->query($sql);
