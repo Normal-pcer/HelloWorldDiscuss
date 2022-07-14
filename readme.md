@@ -1,2 +1,0 @@
-# HelloWorldDiscuss
-Hello World!
