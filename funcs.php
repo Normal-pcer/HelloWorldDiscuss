@@ -1,5 +1,6 @@
 <?
-require "password.php";
+require_once "funcs/user.php";
+require_once "funcs/errors.php";
 /*
 命名方式：
 function ZhangSan(li_si)
@@ -7,24 +8,33 @@ function ZhangSan(li_si)
 wangErMazi = 114514;
 }
 */
-
 function GetConfig()
 {
     // 获取配置文件的内容
     $fileName = "config.json"; // 配置文件名
     $fileData = file_get_contents($fileName); // 读取配置文件
-    $config = json_decode($fileData, true); // 解析配置文件
+    $config = json_decode(
+        $fileData,
+        true
+    ); // 解析配置文件
     return $config;
 }
-
+function WriteConfig($config)
+{
+    $fileName = "config.json";
+    $file = fopen($fileName, 'r');
+    fwrite($file, json_encode($config));
+    fclose($file);
+}
 function GetConnection()
 {
-    $config = GetConfig(); // 获取配置文件的内容
+    $config = GetConfig();
+    $config = $config["safety"]["database"]; // 获取配置文件的内容
     $conn = new mysqli(
         $config["host"],
         $config["user"],
         $config["password"],
-        $config["database"]
+        $config["name"]
     ); // 创建数据库连接
     return $conn;
 }
@@ -85,13 +95,6 @@ function LoadPlugins($action_name)
 function ConsoleLog($message)
 {
     echo "<script type=\"text/javascript\">";
-    echo "console.log(\"" . $message . "\")";
+    echo "console.log(\"" . str_replace("\"", "\\\"", $message) . "\")";
     echo "</script>";
-}
-
-class User
-{
-    function Find()
-    {
-    }
 }

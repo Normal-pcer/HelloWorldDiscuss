@@ -1,0 +1,10 @@
+{
+    "user_id": "[Primary Key]用户唯一标识",
+    "username": "用户名",
+    "password": "密码(crypt加密)",
+    "email": "邮箱",
+    "usergroup": "用户组",
+    "status": "状态(normal正常, banned封禁)",
+    "avatar": "头像",
+    "qianming": "个人签名"
+}

@@ -4,14 +4,17 @@
             "host": "localhost",
             "name": "discuss",
             "user": "discuss",
-            "pass": "test123"
+            "password": "test123"
         },
         "password-salt": {
             "enabled": true,
-            "value": "1ad3ded86524a7c698d975ae0f8"
+            "value": ""
         }
     },
     "defaultSetting": {
         "language": "zh-cn"
+    },
+    "websiteSetting": {
+        "title": "Test"
     }
 }
