@@ -22,9 +22,17 @@ function GetConfig()
 function WriteConfig($config)
 {
     $fileName = "config.json";
-    $file = fopen($fileName, 'r');
+    $file = fopen($fileName, 'w');
     fwrite($file, json_encode($config));
     fclose($file);
+}
+function GetSomething($table, $where)
+{
+    $conn = GetConnection();
+    $sql = "SELECT * FROM `" . $table . "` WHERE " . $where;
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    return $row;
 }
 function GetConnection()
 {

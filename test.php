@@ -1,8 +1,8 @@
-<?php
-$user_perm =
-    "{\"reset-database\": false, " .
-    "\"delete-discuss\": false, " .
-    "\"change-user\": false" .
-    "}";
-$sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Users\", \"$user_perm\")";
-echo $sql;
+<a href="javascript:aaa()">嗨害嗨</a>
+<p id="a"></p>
+<script>
+    function aaa() {
+        var a = document.getElementById("a");
+        a.innerHTML = "Hello World";
+    }
+</script>

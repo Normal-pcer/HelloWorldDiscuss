@@ -74,7 +74,7 @@ function Run()
         `usergroup` VARCHAR(255) NOT NULL DEFAULT '[3]',
         `status` VARCHAR(10) NOT NULL DEFAULT 'normal',
         `avatar` VARCHAR(255) NOT NULL DEFAULT 'source/images/ava.png',
-        `qianming` VARCHAR(255) NOT NULL DEFAULT '啥也没有',
+        `qianming` VARCHAR(255) NOT NULL DEFAULT '嗨害嗨',
         PRIMARY KEY (`user_id`)
     )"
     );
@@ -125,7 +125,7 @@ function Run()
 
 }*/
     $conn->query("CREATE TABLE `tokens` (
-        `token_id` INT NOT NULL AUTO_INCREMENT,
+        `token_id` VARCHAR(255) NOT NULL ,
         `user_id` INT NOT NULL,
         `address` VARCHAR(255) NOT NULL,
         `expiretime` VARCHAR(255) NOT NULL,

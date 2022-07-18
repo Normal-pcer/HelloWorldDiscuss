@@ -14,19 +14,19 @@ function GetUserIdByToken($token_id)
 {
     // 获得数据库中的token信息
     $conn = GetConnection();
-    $sql = "SELECT * FROM `tokens` WHERE `token_id` = " . $token_id;
+    $sql = "SELECT * FROM `tokens` WHERE `token_id` = '" . $token_id . "'";
     $tokens = $conn->query($sql);
+
+    if ($tokens == false) return false;
     $tokens = $tokens->fetch_assoc();
-    // 检查是否为空
-    if (empty($tokens)) {
-        return false;
-    }
-    // 检查地址是否匹配
-    if ($tokens['address'] != $_SERVER['REMOTE_ADDR']) {
-        return false;
-    }
+
+
+    // 不检查地址是否匹配
+    // if ($tokens['address'] != $_SERVER['REMOTE_ADDR']) {
+    //     return false;
+    // }
     // 检查是否过期
-    if ($tokens['expire_time'] < time()) {
+    if ($tokens['expiretime'] < time()) {
         return false;
     }
     // 返回用户ID
@@ -35,7 +35,7 @@ function GetUserIdByToken($token_id)
 
 function GetUserInCookies()
 {
-    if (isset($_COOKIE['user_id'])) {
+    if (isset($_COOKIE['login_token'])) {
         $token_id = $_COOKIE['login_token'];
         $user_id = GetUserIdByToken($token_id);
         if ($user_id) {
@@ -54,8 +54,8 @@ function AddToken($user_id, $time = 3600 * 24 * 30)
     $address = $_SERVER['REMOTE_ADDR'];
     $expire_time = time() + $time;
     $conn = GetConnection();
-    $sql = "INSERT INTO `tokens` (`token_id`, `user_id`, `address`, `expire_time`)"
-        . " VALUES ('" . $token_id . "', '" . $user_id . "', '" . $address . "', '" . $expire_time .
+    $sql = "INSERT INTO `tokens` (`token_id`, `user_id`, `address`, `expiretime`)"
+    . " VALUES ('" . $token_id . "', '" . $user_id . "', '" . "114514" . "', '" . $expire_time .
         "')";
     $conn->query($sql);
     return $token_id;
