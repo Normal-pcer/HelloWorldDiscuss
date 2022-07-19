@@ -1,0 +1,8 @@
+{
+    "discussion_id": "[Primary Key]讨论唯一标识",
+    "floor": "[Primary Key]楼层",
+    "user_id": "发布的用户",
+    "discussionname": "标题",
+    "content": "内容",
+    "sendtime": "发布时间"
+}

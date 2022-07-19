@@ -1,0 +1,5 @@
+{
+    "group_id": "[Primary Key]用户组唯一标识",
+    "groupname": "用户组名称",
+    "permission": "权限"
+}
