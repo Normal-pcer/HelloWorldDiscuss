@@ -171,6 +171,7 @@ function Run()
     $lok = fopen("setup.lock", "w");
     fwrite($lok, "嗨害嗨");
     fclose($lok);
+    echo "<h1>安装程序已完成</h1>";
 }
 
 if (file_exists("setup.lock") && file_get_contents("setup.lock") != "awa") {
