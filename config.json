@@ -1,0 +1,20 @@
+{
+    "safety": {
+        "database": {
+            "host": "localhost",
+            "name": "discuss",
+            "user": "discuss",
+            "password": "test123"
+        },
+        "password-salt": {
+            "enabled": true,
+            "value": ""
+        }
+    },
+    "defaultSetting": {
+        "language": "zh-cn"
+    },
+    "websiteSetting": {
+        "title": "Test"
+    }
+}
