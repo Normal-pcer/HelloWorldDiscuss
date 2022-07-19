@@ -19,18 +19,18 @@ function CreateReply($content, $discussion_id)
 function CreateRoot($title, $content)
 {
     $conn = GetConnection();
-    global $content_;
-    $content_ = $content;
-    global $title_;
-    $title_ = $title;
+    SetSwapData("title", $title);
+    SetSwapData("content", $content);
     LoadPlugins("createRootDiscussion");
+    $title = GetSwapData("title");
+    $content = GetSwapData("content");
     // 获取最高的discussion_id
     $sql = "SELECT MAX(`discussion_id`) FROM `discusses`";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $discussion_id = $row['MAX(`discussion_id`)'] + 1;
     // 插入新讨论
-    $sql = "INSERT INTO `discusses` (`discussion_id`, `discussionname`, `content`, `sendtime`, `user_id`) VALUES ($discussion_id, '$title_', '$content_', " . time() . ", " . GetUserInCookies()["user_id"] . ")";
+    $sql = "INSERT INTO `discusses` (`discussion_id`, `discussionname`, `content`, `sendtime`, `user_id`) VALUES ($discussion_id, '$title', '$content', " . time() . ", " . GetUserInCookies()["user_id"] . ")";
     $result = $conn->query($sql);
 
     return $discussion_id;

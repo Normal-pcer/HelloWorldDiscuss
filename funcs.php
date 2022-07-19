@@ -22,9 +22,8 @@ function GetConfig()
 function WriteConfig($config)
 {
     $fileName = "config.json";
-    $file = fopen($fileName, 'w');
-    fwrite($file, json_encode($config));
-    fclose($file);
+    $fileData = json_encode($config);
+    file_put_contents($fileName, $fileData);
 }
 function GetSomething($table, $where)
 {
@@ -105,4 +104,16 @@ function ConsoleLog($message)
     echo "<script type=\"text/javascript\">";
     echo "console.log(\"" . str_replace("\"", "\\\"", $message) . "\")";
     echo "</script>";
+}
+function SetSwapData($key, $value)
+{
+    $_SESSION["swapData"][$key] = $value;
+}
+function GetSwapData($key)
+{
+    if (array_key_exists($key, $_SESSION["swapData"])) {
+        return $_SESSION["swapData"][$key];
+    } else {
+        return false;
+    }
 }
