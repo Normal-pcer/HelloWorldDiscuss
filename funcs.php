@@ -94,7 +94,7 @@ function LoadPlugins($action_name)
         $pluginData = json_decode($fileData, true); // 解析插件索引文件
         if (array_key_exists($action_name, $pluginData)) {
             $actionFile = "plugins/" . $name . "/" . $pluginData[$action_name]; // 文件名
-            require $actionFile; // 加载文件
+            require_once $actionFile; // 加载文件
         }
     }
     return;

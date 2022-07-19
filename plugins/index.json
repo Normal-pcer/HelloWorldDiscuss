@@ -2,9 +2,5 @@
     "zh-cn": {
         "name": "中文(简体)",
         "tag": "language"
-    },
-    "test": {
-        "name": "测试",
-        "tag": "function"
     }
 }
