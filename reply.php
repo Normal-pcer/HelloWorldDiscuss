@@ -4,7 +4,12 @@ require_once "funcs.php";
 function CreateReply($content, $discussion_id)
 {
     $conn = GetConnection();
+    $content = str_replace("'", "\\'", $content);
+    $content = str_replace("\"", "\\\"", $content);
+    SetSwapData("content", $content);
+    SetSwapData("discussion_id", $discussion_id);
     LoadPlugins("createReply");
+    $content = GetSwapData("content");
     // 读取discussion_id为$discussion_id的讨论
     // 获取最高的floor
     $sql = "SELECT MAX(`floor`) FROM `discusses` WHERE `discussion_id` = $discussion_id";
@@ -12,13 +17,18 @@ function CreateReply($content, $discussion_id)
     $row = $result->fetch_assoc();
     $floor = $row['MAX(`floor`)'] + 1;
     // 插入新回复
-    $sql = "INSERT INTO `discusses` (`discussion_id`, `floor`, `content`, `sendtime`, `user_id`, `discussionname`) VALUES ($discussion_id, $floor, '$content', " . time() . ", " . GetUserInCookies()["user_id"] . ", 'Re: " . GetSomething("discusses", "discussion_id = " . $discussion_id)["discussionname"] .  "')";
+    $sql = "INSERT INTO `discusses` (`discussion_id`, `floor`, `content`, `sendtime`, `user_id`, `discussionname`) VALUES ($discussion_id, $floor, '$content', " . time() . ", " . GetUserInCookies()["user_id"] . ", 'Re: " . str_replace("'", "''", GetSomething("discusses", "discussion_id = " . $discussion_id)["discussionname"]) .  "')";
     $result = $conn->query($sql);
 }
 
 function CreateRoot($title, $content)
 {
     $conn = GetConnection();
+    $content = str_replace("'", "\\'", $content);
+    $content = str_replace("\"", "\\\"", $content);
+    $content = str_replace("'", "\\'", $title);
+    $content = str_replace("\"", "\\\"", $title);
+
     SetSwapData("title", $title);
     SetSwapData("content", $content);
     LoadPlugins("createRootDiscussion");

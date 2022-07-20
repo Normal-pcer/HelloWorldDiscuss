@@ -117,3 +117,8 @@ function GetSwapData($key)
         return false;
     }
 }
+function SetUserInCookies($user_id)
+{
+    $tok = AddToken($user_id);
+    setcookie("login_token", $tok, time() + 3600 * 24 * 30);
+}
