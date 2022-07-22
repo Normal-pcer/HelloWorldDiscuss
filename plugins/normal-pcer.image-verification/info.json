@@ -1,0 +1,8 @@
+{
+    "id": "normal-pcer.image-verification",
+    "name": "图片验证码",
+    "description": "在登录界面显示图片验证码(by normal-pcer)",
+    "tag": "safety",
+    "document": "document.html",
+    "setting": "settings.php"
+}

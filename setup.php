@@ -1,5 +1,6 @@
 <?php
 require_once "funcs.php";
+
 function GetInfo0()
 {
     echo "<form action=\"setup.php\" method=\"POST\">";
@@ -24,26 +25,37 @@ function GetInfo0()
 
 function GetInfo1()
 {
-    $config = json_decode('{
+    $config = json_decode(
+        '{
     "safety": {
         "database": {
-            "host": "' . $_POST['database_host'] . '",
-            "name": "' . $_POST['database_name'] . '",
-            "user": "' . $_POST['database_user'] . '",
-            "password": "' . $_POST['database_pass'] . '"
+            "host": "' . $_POST['database_host'] .
+            '",
+            "name": "' . $_POST['database_name'] .
+            '",
+            "user": "' . $_POST['database_user'] .
+            '",
+            "password": "' . $_POST['database_pass'] .
+            '"
         },
         "password-salt": {
-            "enabled": ' . ($_POST['salt_value'] != '' ? 'true' : 'false') . ',
-            "value": "' . $_POST["salt_value"] . '"
+            "enabled": ' . ($_POST['salt_value'] != '' ? 'true' : 'false') .
+            ',
+            "value": "' . $_POST["salt_value"] .
+            '"
         }
     },
     "defaultSetting": {
-        "language": "' . $_POST["lang"] . '"
+        "language": "' . $_POST["lang"] .
+            '"
     },
     "websiteSetting": {
-        "title": "' . $_POST["title"] . '"
+        "title": "' . $_POST["title"] .
+            '"
     }
-}');
+}',
+        true
+    );
     WriteConfig($config);
     Run();
 }
@@ -136,8 +148,8 @@ function Run()
     $root_perm =
         "{\\\"reset-database\\\": true, " .
         "\\\"delete-discuss\\\": true, " .
-    "\\\"change-user\\\": true," .
-    "\\\"control-plugin\\\": true" .
+        "\\\"change-user\\\": true," .
+        "\\\"control-plugin\\\": true" .
         "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Roots\", \"$root_perm\")";
     $conn->query($sql);
@@ -147,9 +159,9 @@ function Run()
     $admin_perm =
         "{\\\"reset-database\\\": false, " .
         "\\\"delete-discuss\\\": true, " .
-    "\\\"change-user\\\": true," .
-    "\\\"control-plugin\\\": false" .
-    "}";
+        "\\\"change-user\\\": true," .
+        "\\\"control-plugin\\\": false" .
+        "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Administrators\", \"$admin_perm\")";
     $conn->query($sql);
 
@@ -157,7 +169,7 @@ function Run()
     $user_perm =
         "{\\\"reset-database\\\": false, " .
         "\\\"delete-discuss\\\": false, " .
-    "\\\"change-user\\\": false" .
+        "\\\"change-user\\\": false" .
         "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Users\", \"$user_perm\")";
     $conn->query($sql);
@@ -191,8 +203,9 @@ if (file_exists("setup.lock") && file_get_contents("setup.lock") != "awa") {
                 if (!CheckPermission($isTrue["username"], "reset-database")) {
                     ErrorNoPremission();
                 } else {
-                    $lok = fopen("setup.lock", "r");
+                    $lok = fopen("setup.lock", "w");
                     fwrite($lok, "awa");
+                    fclose($lok);
                     GetInfo0();
                 }
             }
@@ -215,8 +228,7 @@ if (file_exists("setup.lock") && file_get_contents("setup.lock") != "awa") {
             "</form>";
     }
 } else {
-    if ($_POST["status"] == "run")  Run();
+    if ($_POST["status"] == "run")  GetInfo1();
     else
         GetInfo0();
 }
-?>

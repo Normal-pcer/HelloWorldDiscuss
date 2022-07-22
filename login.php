@@ -6,6 +6,8 @@ function signup($username, $password, $email)
     $conn = GetConnection();
     $sql = "INSERT INTO `users` (`username`, `password`, `email`) VALUES ('$username', '$password', '$email')";
     $result = $conn->query($sql);
+    $conn->close();
+    return $result;
 }
 function login($username, $password)
 {

@@ -22,7 +22,16 @@ if ($action == "login_process") {
     $user = CheckVerification($_POST['verification'], $_POST['number']) ? (login($_POST["username"], $_POST["password"])) : false;
     if ($user) {
         echo "登录成功";
+        header('Location: index.php');
     } else {
-        echo "登录失败";
+        echo "登录失败，<a href='login.php?action=login'>重试</a>";
+    }
+} else if ($action == "signup_process") {
+    $user = CheckVerification($_POST['verification'], $_POST['number']) ? (signup($_POST["username"], $_POST["password"], $_POST["email"])) : false;
+    if ($user) {
+        echo "注册成功";
+        header('Location: login.php?action=signup');
+    } else {
+        echo "注册失败, <a href='login.php?action=signup'>重试</a>";
     }
 }

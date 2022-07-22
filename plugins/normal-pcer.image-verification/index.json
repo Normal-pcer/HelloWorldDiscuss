@@ -1,3 +1,4 @@
 {
-    "loginForm": "login.php"
+    "loginForm": "login.php",
+    "signupForm": "signup.php"
 }
