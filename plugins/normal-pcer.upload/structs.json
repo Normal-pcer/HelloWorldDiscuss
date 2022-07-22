@@ -1,0 +1,9 @@
+{
+    "databases": {
+        "files": {
+            "user_id": "上传的用户",
+            "filename_in_server": "服务器中的文件名",
+            "filename_source": "上传的文件名"
+        }
+    }
+}

@@ -20,12 +20,12 @@ $discusses = $discusses->fetch_assoc();
 
     echo "<h1>" . $discusses["discussionname"] . "</h1>";
     echo "<p> 作者: " . GetUserInfo("user_id", $discusses["user_id"])["username"] . "</p>";
-    echo "<article>";
+    echo "<article id='mainDiscuss'>";
     echo str_replace("\n", "<br>", $discusses["content"]);
     echo "</article>";
     ?>
     <hr>
-    <form action="reply.php" method="POST">
+    <form action="reply.php" method="POST" id='replyForm'>
         <input type="hidden" name="action" value="reply">
         <input type="hidden" name="aid" value="<?php echo $_GET["aid"]; ?>">
         <textarea name="content" id="content" cols="50" rows="20"></textarea>
@@ -34,13 +34,18 @@ $discusses = $discusses->fetch_assoc();
     <?php
     $sql = "SELECT * FROM `discusses` WHERE `discussion_id` = " . $discuss_id . " AND `floor` > 1";
     $discusses = $conn->query($sql);
+    $cnt = 0;
     while ($row = $discusses->fetch_assoc()) {
         echo "<p> " . GetUserInfo("user_id", $row["user_id"])["username"] . " 的回复 </p>";
-        echo "<article>";
+        echo "<article id='discussNum_" . $row['floor'] . "'>";
         echo str_replace("\n", "<br>", $row["content"]);
-        echo "</article><br>";
+        echo "</article>
+        <br>";
+        $cnt++;
     }
-
+    SetSwapData("discuss_id", $discuss_id);
+    SetSwapData("reply_cnt", $cnt);
+    LoadPlugins("discussPage");
     ?>
 </body>
 

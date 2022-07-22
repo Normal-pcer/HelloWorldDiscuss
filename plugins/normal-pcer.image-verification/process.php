@@ -5,7 +5,7 @@ $action = $_POST["action"];
 
 function CheckVerification($input, $id)
 {
-    $verifications = file_get_contents('plugins/image-verification/verifications.json');
+    $verifications = file_get_contents('plugins/normal-pcer.image-verification/verifications.json');
     $verifications = json_decode($verifications, true);
     if (array_key_exists($id, $verifications)) {
         if ($verifications[$id] == $input) {

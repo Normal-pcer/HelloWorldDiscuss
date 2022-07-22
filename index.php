@@ -6,7 +6,7 @@ $conn = GetConnection();
 <html>
 
 <head>
-    <title>
+    <title><?php echo GetConfig()['websiteSetting']['title']; ?>
     </title>
     <meta charset="utf-8">
 </head>

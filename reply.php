@@ -14,6 +14,7 @@ function CreateReply($content, $discussion_id)
     // 获取最高的floor
     $sql = "SELECT MAX(`floor`) FROM `discusses` WHERE `discussion_id` = $discussion_id";
     $result = $conn->query($sql);
+    echo $sql;
     $row = $result->fetch_assoc();
     $floor = $row['MAX(`floor`)'] + 1;
     // 插入新回复
@@ -26,9 +27,8 @@ function CreateRoot($title, $content)
     $conn = GetConnection();
     $content = str_replace("'", "\\'", $content);
     $content = str_replace("\"", "\\\"", $content);
-    $content = str_replace("'", "\\'", $title);
-    $content = str_replace("\"", "\\\"", $title);
-
+    $title = str_replace("'", "\\'", $title);
+    $title = str_replace("\"", "\\\"", $title);
     SetSwapData("title", $title);
     SetSwapData("content", $content);
     LoadPlugins("createRootDiscussion");

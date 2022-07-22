@@ -136,7 +136,8 @@ function Run()
     $root_perm =
         "{\\\"reset-database\\\": true, " .
         "\\\"delete-discuss\\\": true, " .
-        "\\\"change-user\\\": true" .
+    "\\\"change-user\\\": true," .
+    "\\\"control-plugin\\\": true" .
         "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Roots\", \"$root_perm\")";
     $conn->query($sql);
@@ -146,8 +147,9 @@ function Run()
     $admin_perm =
         "{\\\"reset-database\\\": false, " .
         "\\\"delete-discuss\\\": true, " .
-        "\\\"change-user\\\": true" .
-        "}";
+    "\\\"change-user\\\": true," .
+    "\\\"control-plugin\\\": false" .
+    "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Administrators\", \"$admin_perm\")";
     $conn->query($sql);
 
@@ -155,7 +157,7 @@ function Run()
     $user_perm =
         "{\\\"reset-database\\\": false, " .
         "\\\"delete-discuss\\\": false, " .
-        "\\\"change-user\\\": false, " .
+    "\\\"change-user\\\": false" .
         "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Users\", \"$user_perm\")";
     $conn->query($sql);

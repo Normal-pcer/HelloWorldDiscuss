@@ -1,10 +1,22 @@
 {
     "zh-cn": {
         "name": "中文(简体)",
+        "description": "简体中文语言包(by normal-pcer)",
         "tag": "language"
     },
-    "image-verification": {
+    "normal-pcer.image-verification": {
         "name": "图片验证码",
-        "tag": "image-verification"
+        "description": "在登录界面显示图片验证码(by normal-pcer)",
+        "tag": "safety"
+    },
+    "normal-pcer.upload": {
+        "name": "文件上传支持",
+        "description": "允许用户上传文件(by normal-pcer)",
+        "tag": "function"
+    },
+    "normal-pcer.markdown-editor": {
+        "name": "Markdown编辑器",
+        "description": "站内Markdown编辑器(by normal-pcer), 感谢sparksuite/simplemde-markdown-editor@github和KrauseFx/markdown-to-html-github-style@github",
+        "tag": "function"
     }
 }
