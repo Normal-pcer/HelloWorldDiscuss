@@ -14,6 +14,9 @@ if (isset($_GET['uid'])) {
         $uid = $uid['user_id'];
     }
 }
+
+$conn = GetConnection();
+
 ?>
 
 <html lang='zh-hans-cn'>
@@ -24,7 +27,18 @@ if (isset($_GET['uid'])) {
 </head>
 
 <body>
-
+    <h1><?php echo GetWord("thisUsersDiscussions"); ?></h1>
+    <?php
+    $sql = "SELECT * FROM `discusses` WHERE `user_id` = $uid";
+    $result = $conn->query($sql);
+    do {
+        $d = $result->fetch_assoc();
+        echo "<a href='discuss.php?aid=" . $d['discussion_id'] . "'>" . $d['discussionname'] . "</a><br>";
+        echo "<article>";
+        echo $d['content'];
+        echo "</article>";
+    } while ($d);
+    ?>
 </body>
 
 </html>
