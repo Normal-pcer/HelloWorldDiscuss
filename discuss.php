@@ -43,7 +43,7 @@ $discusses = $discusses->fetch_assoc();
         <br>";
         $cnt++;
     }
-    SetSwapData("discuss_id", $discuss_id);
+    SetSwapData("discussion_id", $discuss_id);
     SetSwapData("reply_cnt", $cnt);
     LoadPlugins("discussPage");
     ?>

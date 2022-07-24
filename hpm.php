@@ -39,8 +39,18 @@ if ($action == 'start') {
     $res = $zip->open($tmpname);
     if ($res === TRUE) {
         $zip->extractTo("plugins/");
+        $newName = dirname("plugins/" . $zip->getNameIndex(0));
         $zip->close();
+        $index = json_decode(file_get_contents("plugins/index.json"), true);
+        $pluginInfo = file_get_contents($newName . '/info.json');
+        $pluginInfo = json_decode($pluginInfo, true);
+        $index[$pluginInfo['name']]['name'] = $pluginInfo['name'];
+        $index[$pluginInfo['name']]['version'] = $pluginInfo['version'];
+        $index[$pluginInfo['name']]['tag'] = $pluginInfo['tag'];
+        $index[$pluginInfo['name']]['description'] = $pluginInfo['description'];
+        file_put_contents("plugins/index.json", json_encode($index));
     } else {
+        echo "文件解压失败";
     }
     unlink($tmpname);
 }

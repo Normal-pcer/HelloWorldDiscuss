@@ -185,6 +185,8 @@ function Run()
     $lok = fopen("setup.lock", "w");
     fwrite($lok, "嗨害嗨");
     fclose($lok);
+
+    header("Location: index.php");
 }
 
 if (file_exists("setup.lock") && file_get_contents("setup.lock") != "awa") {

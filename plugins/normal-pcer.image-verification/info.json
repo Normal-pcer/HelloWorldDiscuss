@@ -4,5 +4,6 @@
     "description": "在登录界面显示图片验证码(by normal-pcer)",
     "tag": "safety",
     "document": "document.html",
-    "setting": "settings.php"
+    "setting": "settings.php",
+    "version": "0.1.0"
 }

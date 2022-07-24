@@ -1,1 +1,20 @@
-{"safety":{"database":{"host":"localhost","name":"discuss","user":"discuss","password":"test123"},"password-salt":{"enabled":false,"value":""}},"defaultSetting":{"language":"zh-cn"},"websiteSetting":{"title":"mkbk"}}
+{
+    "safety": {
+        "database": {
+            "host": "localhost",
+            "name": "discuss",
+            "user": "discuss",
+            "password": "test123"
+        },
+        "password-salt": {
+            "enabled": true,
+            "value": "dfxghtyjkuijihugyefs3redfthiouirteswdrftbghyu98eysrkgifjg9wrnj9vcq74rtvbc83879ytf937t4rfodyp84fhr378gvhefiuhcpweifhyughebfuicnwkevhwelriuvhelivuhera;ovihw387ype9d208"
+        }
+    },
+    "defaultSetting": {
+        "language": "zh-cn"
+    },
+    "websiteSetting": {
+        "title": "mkbk"
+    }
+}
