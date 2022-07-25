@@ -5,7 +5,7 @@ require_once "funcs.php";
 $currentUser = GetUserInCookies();  // 尝试读取Cookie中的用户
 if ($currentUser == false) {
     // 跳转到登录界面
-    header("Location: login.php");
+    header("Location: login.php?action=login");
     exit();
 } else if (!CheckPermission($currentUser['username'], "control-plugin")) {
     // 没有权限
@@ -49,6 +49,10 @@ if ($action == 'start') {
         $index[$pluginInfo['name']]['tag'] = $pluginInfo['tag'];
         $index[$pluginInfo['name']]['description'] = $pluginInfo['description'];
         file_put_contents("plugins/index.json", json_encode($index));
+        // 运行plugins/$pluginname/setup.php(如果存在)
+        if (file_exists($newName . '/setup.php')) {
+            require_once $newName . '/setup.php';
+        }
     } else {
         echo "文件解压失败";
     }

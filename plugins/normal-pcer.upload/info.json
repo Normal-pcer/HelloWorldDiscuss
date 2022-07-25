@@ -1,0 +1,9 @@
+{
+    "id": "normal-pcer.upload",
+    "name": "文件上传支持",
+    "description": "允许用户上传文件(by normal-pcer)",
+    "tag": "function",
+    "document": "document.html",
+    "setting": "settings.php",
+    "version": "0.1.0"
+}

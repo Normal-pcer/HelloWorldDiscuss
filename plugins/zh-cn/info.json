@@ -1,0 +1,9 @@
+{
+    "id": "zh-cn",
+    "name": "中文(简体)",
+    "description": "简体中文语言包(by normal-pcer)",
+    "tag": "language",
+    "document": "document.html",
+    "setting": "settings.php",
+    "version": "0.1.0"
+}
