@@ -44,10 +44,10 @@ if ($action == 'start') {
         $index = json_decode(file_get_contents("plugins/index.json"), true);
         $pluginInfo = file_get_contents($newName . '/info.json');
         $pluginInfo = json_decode($pluginInfo, true);
-        $index[$pluginInfo['name']]['name'] = $pluginInfo['name'];
-        $index[$pluginInfo['name']]['version'] = $pluginInfo['version'];
-        $index[$pluginInfo['name']]['tag'] = $pluginInfo['tag'];
-        $index[$pluginInfo['name']]['description'] = $pluginInfo['description'];
+        $index[$pluginInfo['id']]['name'] = $pluginInfo['name'];
+        $index[$pluginInfo['id']]['version'] = $pluginInfo['version'];
+        $index[$pluginInfo['id']]['tag'] = $pluginInfo['tag'];
+        $index[$pluginInfo['id']]['description'] = $pluginInfo['description'];
         file_put_contents("plugins/index.json", json_encode($index));
         // 运行plugins/$pluginname/setup.php(如果存在)
         if (file_exists($newName . '/setup.php')) {
