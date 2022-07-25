@@ -68,9 +68,13 @@ function CheckPermission($username, $permission_name)
     $sql = "SELECT * FROM `users` WHERE `username` = \"" . $username . "\"";
     $result = $conn->query($sql);
     $result = $result->fetch_assoc();
+<<<<<<< HEAD
     if ($result == false) {
         return false;
     }
+=======
+
+>>>>>>> 1930decbc6b2447083b340cf69194151564a6f7a
     foreach (json_decode($result['usergroup']) as $usergroup => $value) {
         // 找到对应的用户组
         $sql = "SELECT * FROM `usergroups` WHERE `usergroup_id` = \"" . $value . "\"";
@@ -80,9 +84,15 @@ function CheckPermission($username, $permission_name)
         $permission = $result["permission"];
         $permission = json_decode($permission, true);
         $permission = isset($permission_name, $permission) ? $permission[$permission_name] : false;
+<<<<<<< HEAD
         if ($permission) {
             return true;
         }
     }
     return false;
+=======
+
+        return $permission;
+    }
+>>>>>>> 1930decbc6b2447083b340cf69194151564a6f7a
 }

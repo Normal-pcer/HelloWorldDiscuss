@@ -1,6 +1,5 @@
 <?php
 require_once "funcs.php";
-
 function GetInfo0()
 {
     echo "<form action=\"setup.php\" method=\"POST\">";

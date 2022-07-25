@@ -26,10 +26,10 @@ git checkout develop
             "host": "localhost",
             "name": "discuss",
             "user": "discuss",
-            "password": "test123"
+            "pass": "test123"
         },
         "password-salt": {
-            "enabled": false,
+            "enabled": true,
             "value": ""
         }
     },

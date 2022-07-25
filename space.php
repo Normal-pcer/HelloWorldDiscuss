@@ -27,7 +27,8 @@ $conn = GetConnection();
 </head>
 
 <body>
-    <h1><?php echo GetWord("thisUsersDiscussions"); ?></h1>
+    <h1><?php echo GetUserInfo('user_id', $uid)['username'] ?></h1>
+    <h2><?php echo GetWord("thisUsersDiscussions"); ?></h2>
     <?php
     $sql = "SELECT * FROM `discusses` WHERE `user_id` = $uid";
     $result = $conn->query($sql);
