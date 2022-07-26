@@ -1,0 +1,9 @@
+{
+    "name": "用户头像",
+    "id": "normal-pcer.avatar",
+    "description": "显示用户头像(by normal-pcer)",
+    "tag": "function",
+    "version": "0.1.0",
+    "document": "document.html",
+    "setting": "setting.php"
+}

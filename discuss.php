@@ -34,10 +34,10 @@ $discusses = $discusses->fetch_assoc();
     <?php
     $sql = "SELECT * FROM `discusses` WHERE `discussion_id` = " . $discuss_id . " AND `floor` > 1";
     $discusses = $conn->query($sql);
-    $cnt = 0;
+    $cnt = 1;
     while ($row = $discusses->fetch_assoc()) {
-        echo "<p> " . GetUserInfo("user_id", $row["user_id"])["username"] . " 的回复 </p>";
-        echo "<article id='discussNum_" . $row['floor'] . "'>";
+        echo "<p id='authorBox_" . $cnt . "'> " . GetUserInfo("user_id", $row["user_id"])["username"] . " 的回复 </p>";
+        echo "<article id='discussNum_" . $cnt . "'>";
         echo str_replace("\n", "<br>", $row["content"]);
         echo "</article>
         <br>";

@@ -27,7 +27,9 @@ $conn = GetConnection();
 </head>
 
 <body>
-    <h1><?php echo GetUserInfo('user_id', $uid)['username'] ?></h1>
+    <div id="userName">
+        <h1 style="display: inline-block;"><?php echo GetUserInfo('user_id', $uid)['username'] ?></h1>
+    </div>
     <h2><?php echo GetWord("thisUsersDiscussions"); ?></h2>
     <?php
     $sql = "SELECT * FROM `discusses` WHERE `user_id` = $uid";
@@ -39,6 +41,8 @@ $conn = GetConnection();
         echo $d['content'];
         echo "</article>";
     } while ($d);
+    SetSwapData("user_id", $uid);
+    LoadPlugins("spacePage");
     ?>
 </body>
 

@@ -84,7 +84,6 @@ function Run()
         `email` VARCHAR(255) NOT NULL DEFAULT 'example@example.com',
         `usergroup` VARCHAR(255) NOT NULL DEFAULT '[3]',
         `status` VARCHAR(10) NOT NULL DEFAULT 'normal',
-        `avatar` VARCHAR(255) NOT NULL DEFAULT 'source/images/ava.png',
         `qianming` VARCHAR(255) NOT NULL DEFAULT '嗨害嗨',
         PRIMARY KEY (`user_id`)
     )"
