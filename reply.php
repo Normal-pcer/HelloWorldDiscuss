@@ -29,6 +29,7 @@ function CreateRoot($title, $content)
     $content = str_replace("\"", "\\\"", $content);
     $title = str_replace("'", "\\'", $title);
     $title = str_replace("\"", "\\\"", $title);
+    $title = $title == "" ? "无标题" : $title;
     SetSwapData("title", $title);
     SetSwapData("content", $content);
     LoadPlugins("createRootDiscussion");

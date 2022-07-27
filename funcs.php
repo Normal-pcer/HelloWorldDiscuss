@@ -117,8 +117,8 @@ function GetSwapData($key)
         return false;
     }
 }
-function SetUserInCookies($user_id)
+function SetUserInCookies($user_id, $password)
 {
-    $tok = AddToken($user_id);
+    $tok = AddToken($user_id, $password);
     setcookie("login_token", $tok, time() + 3600 * 24 * 30);
 }

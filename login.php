@@ -11,13 +11,14 @@ function signup($username, $password, $email)
 }
 function login($username, $password)
 {
+    $sourcePass = $password;
     $password = PasswordEncode($password);
     $conn = GetConnection();
     $sql = "SELECT * FROM `users` WHERE `username` = '$username' AND `password` = '$password'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     if ($row) {
-        SetUserInCookies($row['user_id']);
+        SetUserInCookies($row['user_id'], $sourcePass);
         return $row;
     } else {
         return false;

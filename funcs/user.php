@@ -14,7 +14,7 @@ function GetUserIdByToken($token_id)
 {
     // 获得数据库中的token信息
     $conn = GetConnection();
-    $sql = "SELECT * FROM `tokens` WHERE `token_id` = '" . $token_id . "'";
+    $sql = "SELECT * FROM `tokens` WHERE `token_id` = '" . hash("sha512", $token_id) . "'";
     $tokens = $conn->query($sql);
 
     if ($tokens == false) return false;
@@ -48,17 +48,20 @@ function GetUserInCookies()
     }
 }
 
-function AddToken($user_id, $time = 3600 * 24 * 30)
+function AddToken($user_id, $password, $time = 3600 * 24 * 30)
 {
     $token_id = md5(uniqid(rand(), true));
-    $address = $_SERVER['REMOTE_ADDR'];
+    $token_id = $token_id . $password;
+    $token_id = hash("sha512", $token_id);
+    $returnValue = $token_id;
+    $token_id = hash("sha512", $token_id);
     $expire_time = time() + $time;
     $conn = GetConnection();
     $sql = "INSERT INTO `tokens` (`token_id`, `user_id`, `address`, `expiretime`)"
     . " VALUES ('" . $token_id . "', '" . $user_id . "', '" . "114514" . "', '" . $expire_time .
         "')";
     $conn->query($sql);
-    return $token_id;
+    return $returnValue;
 }
 
 function CheckPermission($username, $permission_name)
