@@ -25,11 +25,34 @@ $config = GetConfig();
     <ul>
         <li>启用情况：<?php echo GetConfig()['safety']['password-salt']['enabled'] ? '已启用' : '未启用' ?></li>
         <li>盐值的长度：<span style="color: <?php $val = GetConfig()['safety']['password-salt']['value'];
-                                        echo (strlen($val) < 20 ? '#c66' : '#6c6'); ?>"><?php echo strlen($val); ?></span></li>
+                                        echo (strlen($val) < 50 ? '#c66' : '#6c6'); ?>"><?php echo strlen($val); ?></span></li>
     </ul>
-    <p>长度建议设置为不低于20</p>
-    <p>不应修改密码加盐相关内容，不然会使<strong>所有</strong>用户的密码全部失效</p>
+    <p>长度建议设置为不低于50</p>
+    <p>不应修改密码加盐相关内容，否则会使<strong>所有</strong>用户的密码全部失效</p>
     <h1>Plugins/插件</h1>
+    <div id="pluginList">
+        <?php
+        if (CheckPermission($currentUser, "control-plugin")) {
+            $fileName = "plugins/index.json";
+            $fileData = file_get_contents($fileName);
+            $plugins = json_decode($fileData, true);
+            foreach ($plugins as $plugin => $pluginInfo) {
+                $moreInfo = file_get_contents("plugins/$plugin/info.json");
+                $moreInfo = json_decode($moreInfo, true);
+                echo "<h2>$plugin/" . $pluginInfo['name'] . "</h2>";
+                echo "<ul>";
+                echo "<li>描述：" . $pluginInfo['description'] . "</li>";
+                echo "<li>作者：" . $moreInfo['author'] . "</li>";
+                echo "<li>版本：" . $moreInfo['version'] . "</li>";
+                echo "<li><a href='plugins/$plugin/" . $moreInfo["document"] . "'>查看文档</a></li>";
+                echo "<li><a href='plugins/$plugin/" . $moreInfo['setting'] . "'>设置</a></li>";
+                echo "</ul>";
+            }
+        } else {
+            echo "<p>没有权限</p>";
+        }
+        ?>
+    </div>
 </body>
 
 </html>

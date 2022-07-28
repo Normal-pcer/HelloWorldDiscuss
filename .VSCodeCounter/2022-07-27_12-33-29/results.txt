@@ -1,0 +1,127 @@
+Date : 2022-07-27 12:33:29
+Directory : c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss
+Total : 79 files,  31056 codes, 3778 comments, 4554 blanks, all 39388 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          7 |     28,477 |      3,638 |      4,247 |     36,362 |
+| PHP        |         31 |        969 |        103 |         87 |      1,159 |
+| CSS        |          4 |        844 |         37 |        142 |      1,023 |
+| Markdown   |          4 |        494 |          0 |         69 |        563 |
+| JSON       |         29 |        254 |          0 |          5 |        259 |
+| YAML       |          1 |         18 |          0 |          1 |         19 |
+| HTML       |          3 |          0 |          0 |          3 |          3 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                        | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                           |         79 |     31,056 |      3,778 |      4,554 |     39,388 |
+| example                                                                                                                     |          6 |         37 |          0 |          0 |         37 |
+| example\database                                                                                                            |          4 |         29 |          0 |          0 |         29 |
+| funcs                                                                                                                       |          3 |        118 |         12 |         13 |        143 |
+| plugins                                                                                                                     |         52 |     30,043 |      3,691 |      4,472 |     38,206 |
+| plugins\normal-pcer.avatar                                                                                                  |          7 |         39 |          0 |          3 |         42 |
+| plugins\normal-pcer.image-verification                                                                                      |          8 |         90 |          1 |          9 |        100 |
+| plugins\normal-pcer.markdown-editor                                                                                         |         24 |     29,790 |      3,675 |      4,450 |     37,915 |
+| plugins\normal-pcer.markdown-editor\mde                                                                                     |         14 |     29,608 |      3,675 |      4,442 |     37,725 |
+| plugins\normal-pcer.markdown-editor\mde\debug                                                                               |          3 |     27,201 |      3,450 |      4,068 |     34,719 |
+| plugins\normal-pcer.markdown-editor\mde\dist                                                                                |          2 |         61 |         12 |          0 |         73 |
+| plugins\normal-pcer.markdown-editor\mde\src                                                                                 |          3 |      1,902 |        192 |        307 |      2,401 |
+| plugins\normal-pcer.markdown-editor\mde\src\css                                                                             |          1 |        280 |          0 |         48 |        328 |
+| plugins\normal-pcer.markdown-editor\mde\src\js                                                                              |          2 |      1,622 |        192 |        259 |      2,073 |
+| plugins\normal-pcer.markdown-editor\mde\src\js\codemirror                                                                   |          1 |         35 |          2 |          8 |         45 |
+| plugins\normal-pcer.upload                                                                                                  |          8 |         83 |         15 |          8 |        106 |
+| plugins\zh-cn                                                                                                               |          4 |         15 |          0 |          2 |         17 |
+| struct                                                                                                                      |          6 |         38 |          0 |          0 |         38 |
+| struct\database                                                                                                             |          4 |         29 |          0 |          0 |         29 |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                    | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\LICENSE.ZH-CN.md                                                     | Markdown   |          6 |          0 |          5 |         11 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\README.md                                                            | Markdown   |        198 |          0 |         11 |        209 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\admin.php                                                            | PHP        |         31 |          0 |          4 |         35 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\discuss.php                                                          | PHP        |         47 |          0 |          5 |         52 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\cookie.json                                                  | JSON       |          3 |          0 |          0 |          3 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\database\discusses.json                                      | JSON       |          8 |          0 |          0 |          8 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\database\tokens.json                                         | JSON       |          6 |          0 |          0 |          6 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\database\usergroups.json                                     | JSON       |          5 |          0 |          0 |          5 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\database\users.json                                          | JSON       |         10 |          0 |          0 |         10 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\example\permission.json                                              | JSON       |          5 |          0 |          0 |          5 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\funcs.php                                                            | PHP        |        107 |         12 |          6 |        125 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\funcs\errors.php                                                     | PHP        |         17 |          0 |          2 |         19 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\funcs\password.php                                                   | PHP        |         28 |          2 |          2 |         32 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\funcs\user.php                                                       | PHP        |         73 |         10 |          9 |         92 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\hpm.php                                                              | PHP        |         51 |          7 |          3 |         61 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\index.php                                                            | PHP        |         48 |          0 |          4 |         52 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\login.php                                                            | PHP        |         66 |          0 |          4 |         70 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\index.json                                                   | JSON       |         26 |          0 |          0 |         26 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\disPage.php                               | PHP        |         16 |          0 |          0 |         16 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\document.json                             | JSON       |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\index.json                                | JSON       |          4 |          0 |          0 |          4 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\info.json                                 | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\setting.php                               | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\setup.php                                 | PHP        |          5 |          0 |          1 |          6 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.avatar\space.php                                 | PHP        |          5 |          0 |          0 |          5 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\document.html                 | HTML       |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\index.json                    | JSON       |          4 |          0 |          0 |          4 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\info.json                     | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\login.php                     | PHP        |         17 |          0 |          2 |         19 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\process.php                   | PHP        |         34 |          0 |          4 |         38 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\settings.php                  | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\signup.php                    | PHP        |         18 |          1 |          1 |         20 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.image-verification\verifications.json            | JSON       |          8 |          0 |          0 |          8 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\disPage.php                      | PHP        |          8 |          0 |          0 |          8 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\document.html                    | HTML       |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\example.css                      | CSS        |         10 |          0 |          2 |         12 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\example.js                       | JavaScript |         82 |          0 |          1 |         83 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\index.json                       | JSON       |          4 |          0 |          0 |          4 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\info.json                        | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mainPage.php                     | PHP        |         14 |          0 |          0 |         14 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\.travis.yml                  | YAML       |         18 |          0 |          1 |         19 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\CONTRIBUTING.md              | Markdown   |          9 |          0 |          2 |         11 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\README.md                    | Markdown   |        281 |          0 |         51 |        332 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\bower.json                   | JSON       |         23 |          0 |          1 |         24 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\debug\simplemde.css          | CSS        |        553 |         31 |         92 |        676 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\debug\simplemde.debug.js     | JavaScript |     13,324 |      1,710 |      1,990 |     17,024 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\debug\simplemde.js           | JavaScript |     13,324 |      1,709 |      1,986 |     17,019 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\dist\simplemde.min.css       | CSS        |          1 |          6 |          0 |          7 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\dist\simplemde.min.js        | JavaScript |         60 |          6 |          0 |         66 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\gulpfile.js                  | JavaScript |         65 |         21 |         11 |         97 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\package.json                 | JSON       |         48 |          0 |          1 |         49 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\src\css\simplemde.css        | CSS        |        280 |          0 |         48 |        328 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\src\js\codemirror\tablist.js | JavaScript |         35 |          2 |          8 |         45 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\mde\src\js\simplemde.js          | JavaScript |      1,587 |        190 |        251 |      2,028 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\reply.php                        | PHP        |         25 |          0 |          1 |         26 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\root.php                         | PHP        |         30 |          0 |          2 |         32 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.markdown-editor\settings.php                     | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\document.html                             | HTML       |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\form.php                                  | PHP        |          5 |          0 |          0 |          5 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\index.json                                | JSON       |          2 |          0 |          1 |          3 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\info.json                                 | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\process.php                               | PHP        |         40 |          7 |          2 |         49 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\settings.php                              | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\setup.php                                 | PHP        |         18 |          8 |          3 |         29 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\normal-pcer.upload\structs.json                              | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\zh-cn\document.json                                          | JSON       |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\zh-cn\index.json                                             | JSON       |          6 |          0 |          0 |          6 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\zh-cn\info.json                                              | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\plugins\zh-cn\settings.php                                           | PHP        |          0 |          0 |          1 |          1 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\reply.php                                                            | PHP        |         48 |          5 |          5 |         58 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\requirer.php                                                         | PHP        |          5 |          0 |          2 |          7 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\setup.php                                                            | PHP        |        172 |         51 |         12 |        235 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\space.php                                                            | PHP        |         41 |          0 |          8 |         49 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\cookie.json                                                   | JSON       |          3 |          0 |          0 |          3 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\database\discusses.json                                       | JSON       |          8 |          0 |          0 |          8 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\database\tokens.json                                          | JSON       |          6 |          0 |          0 |          6 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\database\usergroups.json                                      | JSON       |          5 |          0 |          0 |          5 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\database\users.json                                           | JSON       |         10 |          0 |          0 |         10 |
+| c:\Users\田亚非\Documents\Code\Projects\HelloWorldDiscuss\struct\permission.json                                               | JSON       |          6 |          0 |          0 |          6 |
+| Total                                                                                                                       |            |     31,056 |      3,778 |      4,554 |     39,388 |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

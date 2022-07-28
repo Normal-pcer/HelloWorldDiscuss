@@ -44,7 +44,7 @@ function login($username, $password)
             echo '<input type="email" name="email" placeholder="邮箱">';
             echo '<input type="submit" value="注册">';
             LoadPlugins('signupForm');
-        } else if ($_GET['action'] == 'login') {
+        } else if (!isset($_GET["action"]) || $_GET['action'] == 'login') {
             echo '<h1>登录</h1>';
             echo '<form action="login.php" method="post">';
             echo '<input type="hidden" name="action" value="login_process">';

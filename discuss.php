@@ -11,7 +11,7 @@ $discusses = $discusses->fetch_assoc();
 
 <head>
     <title>
-        <?php echo $discusses["discussionname"] . " - " . GetConfig()["websiteSetting"]["title"]; ?>
+        <?php echo $discusses["discussionname"] . " - " . sprintf(GetWord("nameShow"), (GetConfig()["websiteSetting"]["title"])); ?>
     </title>
 </head>
 
@@ -29,14 +29,14 @@ $discusses = $discusses->fetch_assoc();
         <input type="hidden" name="action" value="reply">
         <input type="hidden" name="aid" value="<?php echo $_GET["aid"]; ?>">
         <textarea name="content" id="content" cols="50" rows="20"></textarea>
-        <input type="submit" value="回复">
+        <input type="submit" value="<?php echo GetWord("reply"); ?>">
     </form>
     <?php
     $sql = "SELECT * FROM `discusses` WHERE `discussion_id` = " . $discuss_id . " AND `floor` > 1";
     $discusses = $conn->query($sql);
     $cnt = 1;
     while ($row = $discusses->fetch_assoc()) {
-        echo "<p id='authorBox_" . $cnt . "'> " . GetUserInfo("user_id", $row["user_id"])["username"] . " 的回复 </p>";
+        echo "<p id='authorBox_" . $cnt . "'> " . GetUserInfo("user_id", $row["user_id"])["username"] . GetWord('sb\'sReply') . "</p>";
         echo "<article id='discussNum_" . $cnt . "'>";
         echo str_replace("\n", "<br>", $row["content"]);
         echo "</article>

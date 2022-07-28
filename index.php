@@ -6,7 +6,7 @@ $conn = GetConnection();
 <html>
 
 <head>
-    <title><?php echo GetConfig()['websiteSetting']['title']; ?>
+    <title><?php echo sprintf(GetWord("nameShow"), (GetConfig()["websiteSetting"]["title"])); ?>
     </title>
     <meta charset="utf-8">
 </head>

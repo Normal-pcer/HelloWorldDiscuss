@@ -20,10 +20,10 @@ if (isset($_POST['action'])) {
 
 if ($action == 'start') {
     // 显示初始表单
-    echo "<h1>Hello World Discuss 包管理器</h1>";
+    echo "<h1>" . GetWord("hpmTitle") . "</h1>";
     echo "<form action='hpm.php' method='post'>";
     echo "<input type='hidden' name='action' value='install'>";
-    echo "请输入zip包的路径(如'./package.zip', 'https://example.com/releases/package-1.1.2.zip')<input type='text' name='path'>";
+    echo GetWord('hpmPathTip') . "<input type='text' name='path'>";
     echo "<input type='submit' value='安装'>";
 } else if ($action == 'install') {
     // 安装
