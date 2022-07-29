@@ -82,7 +82,7 @@ function CheckPermission($username, $permission_name)
         // 判断权限
         $permission = $result["permission"];
         $permission = json_decode($permission, true);
-        $permission = isset($permission_name, $permission) ? $permission[$permission_name] : false;
+        $permission = isset($permission[$permission_name]) ? $permission[$permission_name] : false;
         if ($permission) {
             return true;
         }

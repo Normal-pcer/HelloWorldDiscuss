@@ -32,7 +32,7 @@ $config = GetConfig();
     <h1>Plugins/插件</h1>
     <div id="pluginList">
         <?php
-        if (CheckPermission($currentUser, "control-plugin")) {
+        if (CheckPermission($currentUser['username'], "control-plugin")) {
             $fileName = "plugins/index.json";
             $fileData = file_get_contents($fileName);
             $plugins = json_decode($fileData, true);
