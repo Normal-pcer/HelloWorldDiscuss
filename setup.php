@@ -149,7 +149,8 @@ function Run()
         "{\\\"reset-database\\\": true, " .
         "\\\"delete-discuss\\\": true, " .
         "\\\"change-user\\\": true," .
-        "\\\"control-plugin\\\": true" .
+    "\\\"control-plugin\\\": true," .
+    "\\\"use-bash\\\": true" .
         "}";
     $sql = "INSERT INTO `usergroups` (`usergroupname`, `permission`) VALUES (\"Roots\", \"$root_perm\")";
     $conn->query($sql);
