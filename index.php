@@ -3,10 +3,10 @@ require "funcs.php";
 $conn = GetConnection();
 ?>
 
-<html>
+<html lang="<?php echo GetLanguageName() ?>">
 
 <head>
-    <title><?php echo sprintf(GetWord("nameShow"), (GetConfig()["websiteSetting"]["title"])); ?>
+    <title><?php echo sprintf(GetWord("global.showTitle"), (GetConfig()["websiteSetting"]["title"])); ?>
     </title>
     <meta charset="utf-8">
 </head>
@@ -14,12 +14,14 @@ $conn = GetConnection();
 <body id="pageBody">
     <div id="mainNavBar">
     </div>
+    <h1 id="websiteTitle"><?php echo sprintf(GetWord("global.showTitle"), (GetConfig()["websiteSetting"]["title"])); ?></h1>
+    </h1>
     <div id="editNewDiscuss">
         <?php
         if (GetUserInCookies() == false) {
-            echo "<p id='messageLogin'>" . GetWord("messageLogin") . "</p>\n";
+            echo "<p id='messageLogin'>" . sprintf(GetWord("index.editor.loginTip"), "login.php") . "</p>\n";
         } else {
-            echo "<a href='javascript:hwd_ShowEditor()' id='linkToEditor'>" . GetWord("linkToEditor") . "</a>\n";
+            echo "<a href='javascript:hwd_ShowEditor()' id='linkToEditor'>" . GetWord("index.editor.link") . "</a>\n";
         }
         ?>
     </div>
@@ -32,8 +34,7 @@ $conn = GetConnection();
             echo "<div id='discuss_" . $row['discussion_id'] . "'>";
             echo "<a href='discuss.php?aid=" . $row['discussion_id'] . "'' id='linkTo_" . $row['discussion_id'] .
                 "'><h1>" . $row["discussionname"] . "</h1></a>";
-            echo "<p id='author_" . $row['discussion_id'] . "'> " . GetWord('author') . ": " .
-                GetUserInfo("user_id", $row["user_id"])["username"] . "</p>";
+            echo "<p id='author_" . $row['discussion_id'] . "'> " . sprintf(GetWord('global.showAuthor'), GetUserInfo("user_id", $row["user_id"])["username"])  . "</p>";
         }
         ?>
     </div>

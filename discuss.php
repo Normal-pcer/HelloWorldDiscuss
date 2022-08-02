@@ -11,7 +11,7 @@ $discusses = $discusses->fetch_assoc();
 
 <head>
     <title>
-        <?php echo $discusses["discussionname"] . " - " . sprintf(GetWord("nameShow"), (GetConfig()["websiteSetting"]["title"])); ?>
+        <?php echo $discusses["discussionname"] . " - " . sprintf(GetWord("global.showTitle"), (GetConfig()["websiteSetting"]["title"])); ?>
     </title>
 </head>
 

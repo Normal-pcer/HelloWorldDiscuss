@@ -1,11 +1,6 @@
 {
-    "messageLogin": "<a href='login.php?action=login'>登录</a>后即可发布讨论",
-    "linkToEditor": "发布讨论",
-    "author": "作者",
-    "thisUsersDiscussions": "该用户的讨论",
-    "reply": "回复",
-    "sb'sReply": "的回复",
-    "hpmTitle": "Hello World Discuss 包管理器",
-    "hpmPathTip": "请输入zip包的路径(如'./package.zip', 'https://example.com/releases/1.1.2/package.zip')",
-    "nameShow": "%s论坛"
+    "index.editor.loginTip": "请<a href=\"%s\">登录</a>后再发布讨论",
+    "index.editor.link": "发布讨论",
+    "global.showTitle": "%s论坛",
+    "global.showAuthor": "作者：%s"
 }

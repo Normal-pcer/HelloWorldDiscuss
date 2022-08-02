@@ -8,7 +8,7 @@ $config = GetConfig();
 
 <head>
     <meta charset='UTF-8'>
-    <title>网站管理</title>
+    <title>网站管理 - <?php echo sprintf(GetWord("global.showTitle"), GetConfig()['websiteSetting']['title']); ?></title>
 </head>
 
 <body>
