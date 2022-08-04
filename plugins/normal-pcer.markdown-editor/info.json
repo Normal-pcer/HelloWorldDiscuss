@@ -1,0 +1,10 @@
+{
+    "id": "normal-pcer.markdown-editor",
+    "name": "Markdown编辑器",
+    "description": "使用markdown编辑器撰写讨论",
+    "tag": "function",
+    "document": "document.html",
+    "setting": "settings.php",
+    "version": "0.1.0",
+    "author": "normal-pcer"
+}
